@@ -3,7 +3,7 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
-from class_I.pattern_count import *
+from dna_messaging.pattern_count import *
 
 
 def test_pattern_count():

@@ -3,7 +3,7 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
-from class_I.reverse_complement import *
+from dna_messaging.reverse_complement import *
 
 
 def test_reverse_complement():
