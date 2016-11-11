@@ -16,5 +16,5 @@ def reverse_complement(string):
     return text
 
 
-lines = sys.stdin.read().splitlines()
-print(reverse_complement(*lines))
+# lines = sys.stdin.read().splitlines()
+# print(reverse_complement(*lines))

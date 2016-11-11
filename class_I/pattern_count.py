@@ -53,7 +53,7 @@ def pattern_match(substring, text):
         if text[i:i+len(substring)] == substring:
             index += [i]
         i += 1
-    return ' '.join(index)
+    return ' '.join([str(i) for i in index])
 
 
 def clump_finding(genome, k, L, t):

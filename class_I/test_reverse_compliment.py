@@ -6,5 +6,5 @@ __email__ = 'lockwm@uw.edu'
 from class_I.reverse_complement import *
 
 
-def test_reverse_complement(string):
+def test_reverse_complement():
     assert reverse_complement('AAAACCCGGT') == 'ACCGGGTTTT'

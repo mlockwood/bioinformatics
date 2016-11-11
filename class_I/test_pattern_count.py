@@ -15,7 +15,7 @@ def test_frequent_kmers():
 
 
 def test_pattern_match():
-    assert pattern_match('ATAT', 'GATATATGCATATACTT') == '1, 3, 9'
+    assert pattern_match('ATAT', 'GATATATGCATATACTT') == '1 3 9'
 
 
 def test_clump_finding():
