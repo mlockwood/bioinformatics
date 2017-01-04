@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from dna_messaging.pattern_count import *
+
+
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
-
-
-from dna_messaging.pattern_count import *
 
 
 STRING_1 = ('GAGCGCTGGGTTAACTCGCTACTTCCCGACGAGCGCTGTGGCGCAAATTGGCGATGAAACTGCAGAGAGAACTGGTCATCCAACTGAATTCTCCCCGCTATCGCAT'
@@ -12,12 +15,6 @@ STRING_2 = ('CCAAATCCCCTCATGGCATGCATTCCCGCAGTATTTAATCCTTTCATTCTGCATATAAGTAGTGAAG
 'AACCATGATGAATGCACGGCGATTGCGCCATAATCCAAACA')
 STRING_3 = ('CCGTCATCCGTCATCCTCGCCACGTTGGCATGCATTCCGTCATCCCGTCAGGCATACTTCTGCATATAAGTACAAACATCCGTCATGTCAAAGGGAGCCCGCAGCG'
 'GTAAAACCGAGAACCATGATGAATGCACGGCGATTGC')
-
-
-def test_get_all_kmers():
-    assert set(get_all_kmers(2)) == {'AA', 'AC', 'AG', 'AT', 'CA', 'CC', 'CG', 'CT', 'GA', 'GC', 'GG', 'GT', 'TA', 'TC',
-                                     'TG', 'TT'}
-    assert len(get_all_kmers(5)) == 1024
 
 
 def test_pattern_count():
@@ -31,10 +28,6 @@ def test_pattern_match():
 def test_clump_finding():
     assert clump_finding('CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA', 5, 50, 4
                          ) == 'CGACA GAAGA'
-
-
-def test_hamming_distance():
-    assert hamming_distance('GGGCCGTTGGT', 'GGACCGTTGAC') == 3
 
 
 class TestApproximatePatternMatch:

@@ -1,33 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 import sys
 
+from dna_messaging.generic import *
 from dna_messaging.reverse_complement import reverse_complement
 
 
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
-
-
-BASES = {'A', 'C', 'G', 'T'}
-
-
-def get_all_kmers(k, kmer=''):
-    """
-    Generate a dictionary of all k-mers for k
-    :param k: length of kmer
-    :return: {kmer: 0}
-    """
-    kmers = {}
-    if len(kmer) == k:
-        return {kmer: 0}
-    else:
-        for base in BASES:
-            kmers.update(get_all_kmers(k, '{}{}'.format(kmer, base)))
-        return kmers
 
 
 def pattern_count(genome, pattern):
@@ -102,22 +84,6 @@ def clump_finding(genome, k, L, t):
         i += 1
 
     return ' '.join(sorted(list(results.keys())))
-
-
-def hamming_distance(p, q):
-    """
-    Find the hamming distance between two strings.
-    :param p: genome string
-    :param q: genome string
-    :return: hamming distance between the two input strings
-    """
-    i = 0
-    distance = 0
-    while i < len(p):
-        if p[i] != q[i]:
-            distance += 1
-        i += 1
-    return distance
 
 
 def approximate_pattern_match(kmer, genome, d):
