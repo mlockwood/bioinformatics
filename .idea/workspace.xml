@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849964-3687-44c1-907b-2568064d7c39" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/generic.py" afterPath="$PROJECT_DIR$/dna_messaging/generic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/constants.py" afterPath="$PROJECT_DIR$/dna_messaging/constants.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/motif.py" afterPath="$PROJECT_DIR$/dna_messaging/motif.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/test/test_generic.py" afterPath="$PROJECT_DIR$/dna_messaging/test/test_generic.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/test/test_motif.py" afterPath="$PROJECT_DIR$/dna_messaging/test/test_motif.py" />
     </list>
     <ignored path="bioinformatics.iws" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="motif.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dna_messaging/motif.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="827">
-              <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+            <state relative-caret-position="407">
+              <caret line="164" column="16" lean-forward="false" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
               <folding>
                 <element signature="e#48#59#0" expanded="true" />
               </folding>
@@ -40,8 +39,8 @@
       <file leaf-file-name="test_motif.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dna_messaging/test/test_motif.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -82,7 +81,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dna_messaging/constants.py" />
         <option value="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
         <option value="$PROJECT_DIR$/dna_messaging/reverse_complement.py" />
         <option value="$PROJECT_DIR$/dna_messaging/deamination.py" />
@@ -92,8 +90,9 @@
         <option value="$PROJECT_DIR$/comparing_genes/longest_common_substring.py" />
         <option value="$PROJECT_DIR$/comparing_genes/test/test_manhattan_tourist.py" />
         <option value="$PROJECT_DIR$/dna_messaging/test/test_generic.py" />
-        <option value="$PROJECT_DIR$/dna_messaging/test/test_motif.py" />
         <option value="$PROJECT_DIR$/dna_messaging/generic.py" />
+        <option value="$PROJECT_DIR$/dna_messaging/constants.py" />
+        <option value="$PROJECT_DIR$/dna_messaging/test/test_motif.py" />
         <option value="$PROJECT_DIR$/dna_messaging/motif.py" />
       </list>
     </option>
@@ -702,26 +701,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dna_messaging/test/test_pattern_count.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dna_messaging/test/test_reverse_compliment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dna_messaging/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -824,18 +807,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dna_messaging/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="47" lean-forward="false" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dna_messaging/test/test_pattern_count.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dna_messaging/test/test_motif.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dna_messaging/motif.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="827">
-          <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+        <state relative-caret-position="407">
+          <caret line="164" column="16" lean-forward="false" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
           <folding>
             <element signature="e#48#59#0" expanded="true" />
           </folding>

@@ -4,6 +4,7 @@
 import copy
 import sys
 
+from dna_messaging.constants import PROFILE_INDEX
 from dna_messaging.generic import get_all_mismatched_kmers
 
 __author__ = 'Michael Lockwood'
@@ -117,6 +118,77 @@ def median_string(genomes, k):
     return min(kmers, key=kmers.get)
 
 
+def most_probable_in_profile(genome, k, profile_matrix):
+    """
+    Find the most probably motif given a profile matrix and a length of
+    k within the genome.
+    :param genome: genome string
+    :param k: length of kmers/motif
+    :param profile_matrix: profile probabilities for each base
+    :return: most probably motif
+    """
+    max_score = (0, None)
+    profile = get_profile_dict(profile_matrix)
+
+    # Explore the genome by kmer of length k for each index until the end
+    i = 0
+    while i < len(genome) - int(k) + 1:
+
+        # Consider the kmer by base, stop if the current sum is less than the max score
+        j = 0
+        score = 1
+        while j < int(k):
+
+            # Multiple the score by the profile probability of the current j index and observed base
+            score *= profile[j][genome[i+j]]
+
+            # If score probability is less than the max_score, stop processing kmer
+            if score < max_score[0]:
+                j = k
+            j += 1
+
+        # If score exceeded the max_score replace with the current kmer and its probability
+        if score > max_score[0]:
+            max_score = (score, genome[i:i+int(k)])
+        i += 1
+
+    return max_score[1]
+
+
+def get_profile_dict(profile_matrix):
+    """
+    Take a list of space delimited probabilities and convert it to a
+    dictionary of {column: {base: probability}}.
+    :param profile_matrix: list of space delimited probabilities
+    :return: dictionary representation of profile matrix
+    """
+    profile = {}
+
+    # Convert space delimited entries to actual lists
+    matrix = []
+    for row in profile_matrix:
+        matrix.append([float(f) for f in row.split()])
+
+
+    # Process by column
+    j = 0
+    while j < len(matrix[0]):
+
+        # Add column to profile
+        profile[j] = {}
+
+        # Add each base and its probability
+        i = 0
+        while i < len(matrix):
+            profile[j][PROFILE_INDEX[i]] = matrix[i][j]
+            i += 1
+
+        j += 1
+
+    return profile
+
+
 lines = sys.stdin.read().splitlines()
-k = int(lines[0])
-print(median_string(lines[1:], k))
+genome = lines[0]
+k = int(lines[1])
+print(most_probable_in_profile(genome, k, lines[2:]))
