@@ -133,5 +133,5 @@ def print_de_bruijn_graph(graph):
     return result
 
 
-lines = sys.stdin.read()
-print(de_bruijn_graph_by_composition(lines))
+#lines = sys.stdin.read()
+#print(de_bruijn_graph_by_composition(lines))

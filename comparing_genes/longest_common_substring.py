@@ -66,5 +66,5 @@ def solve_LCS(v, w):
     return output_LCS(backtrack, v, len(v), len(w))
 
 
-sys.setrecursionlimit(10000)
-print(solve_LCS(*sys.stdin.read().splitlines()))
+#sys.setrecursionlimit(10000)
+#print(solve_LCS(*sys.stdin.read().splitlines()))

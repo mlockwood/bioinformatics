@@ -7,7 +7,7 @@ from comparing_genes.manhattan_tourist import *
 
 
 def test_manhattan_tourist():
-    reader = open('manhattan_tourist_test_data.txt', 'r')
+    reader = open('comparing_genes/test/manhattan_tourist_test_data.txt', 'r')
     lines = []
     for row in reader:
         lines.append(row.rstrip())
