@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import copy
 import sys
 
 from dna_messaging.generic import get_all_mismatched_kmers
@@ -32,7 +33,7 @@ def motif_enumerations(genomes, k, d):
             # If current pattern not in patterns find its matching kmers
             if genome[i:i+int(k)] not in patterns:
                 # Find all potential mismatched kmers
-                patterns[genome[i:i+int(k)]] = get_all_mismatched_kmers(int(k), int(d), genome[i:i+int(k)])
+                patterns[genome[i:i+int(k)]] = get_all_mismatched_kmers(genome[i:i+int(k)], int(d))
 
                 # Setup lookup -> {kmer: {pattern: True}}
                 if init:
@@ -57,7 +58,7 @@ def motif_enumerations(genomes, k, d):
 
             i += 1
 
-        # Handle end-of-line functions
+        # Handle end-of-line tasks
         for kmer in list(kmers.keys()):
             # If the kmer did not appear in this line remove it from all references
             if not kmers[kmer]:
@@ -74,6 +75,48 @@ def motif_enumerations(genomes, k, d):
 
     return ' '.join(sorted(kmers.keys()))
 
+
+def median_string(genomes, k):
+    """
+    Find the k-mer with the minimum hamming distance score summed over
+    all lines within the genomes.
+    :param genomes: list of genome strings
+    :param k: length of k-mers
+    :return: motif k-mer with the lowest score the genome
+    """
+    kmers = {}  # records the score for all kmers
+    patterns = {}  # lookup of observed patterns to kmers and their distance score
+    lookup = {}  # store the minimum score for kmers in each line
+
+    for genome in genomes:
+
+        # Explore the genome by pattern of length k for each index until the end
+        i = 0
+        while i < len(genome) - int(k) + 1:
+            # If current pattern not in patterns find its matching kmers
+            if genome[i:i+int(k)] not in patterns:
+                # Find all potential mismatched kmers
+                patterns[genome[i:i+int(k)]] = get_all_mismatched_kmers(genome[i:i+int(k)], int(k))
+
+            # If this is the first pattern for the genome line the lookup is equal to the pattern scores
+            if not i:
+                lookup = copy.deepcopy(patterns[genome[i:i+int(k)]])
+
+            else:
+                # Check to see if a new minimum applies to each kmer
+                for kmer in patterns[genome[i:i+int(k)]]:
+                    if patterns[genome[i:i+int(k)]][kmer] < lookup[kmer]:
+                        lookup[kmer] = patterns[genome[i:i+int(k)]][kmer]
+
+            i += 1
+
+        # Handle end-of-line summing
+        for kmer in lookup:
+            kmers[kmer] = kmers.get(kmer, 0) + lookup[kmer]
+
+    return min(kmers, key=kmers.get)
+
+
 lines = sys.stdin.read().splitlines()
-k, d = lines[0].split()
-print(motif_enumerations(lines[1:], k, d))
+k = int(lines[0])
+print(median_string(lines[1:], k))

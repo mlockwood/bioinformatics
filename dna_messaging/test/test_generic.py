@@ -19,4 +19,4 @@ def test_hamming_distance():
 
 
 def test_get_all_mismatched_kmers():
-    assert set(get_all_mismatched_kmers(2, 1, 'AA')) == {'AA', 'AC', 'AG', 'AT', 'CA', 'GA', 'TA'}
+    assert set(get_all_mismatched_kmers('AA', 1)) == {'AA', 'AC', 'AG', 'AT', 'CA', 'GA', 'TA'}

@@ -11,3 +11,7 @@ __email__ = 'lockwm@uw.edu'
 
 def test_motif_enumerations():
     assert motif_enumerations(['ATTTGGC', 'TGCCTTA', 'CGGTATC', 'GAAAATT'], 3, 1) == 'ATA ATT GTT TTT'
+
+
+def test_median_string():
+    assert median_string(['AAATTGACGCAT', 'GACGACCACGTT', 'CGTCAGCGCCTG', 'GCTGAGCACCGG', 'AGTTCGGGACAG'], 3) == 'GAC'
