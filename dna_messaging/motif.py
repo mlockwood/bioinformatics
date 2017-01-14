@@ -4,7 +4,7 @@
 import copy
 import sys
 
-from dna_messaging.constants import PROFILE_INDEX
+from dna_messaging.constants import BASES, PROFILE_INDEX
 from dna_messaging.generic import get_all_mismatched_kmers
 
 __author__ = 'Michael Lockwood'
@@ -118,41 +118,43 @@ def median_string(genomes, k):
     return min(kmers, key=kmers.get)
 
 
-def most_probable_in_profile(genome, k, profile_matrix):
+def most_probable_in_profile(genome, k, profile):
     """
     Find the most probably motif given a profile matrix and a length of
     k within the genome.
     :param genome: genome string
     :param k: length of kmers/motif
     :param profile_matrix: profile probabilities for each base
-    :return: most probably motif
+    :return: most probable motif
     """
-    max_score = (0, None)
-    profile = get_profile_dict(profile_matrix)
+    max_prob = (0, genome[:int(k)])
 
     # Explore the genome by kmer of length k for each index until the end
     i = 0
     while i < len(genome) - int(k) + 1:
 
-        # Consider the kmer by base, stop if the current sum is less than the max score
+        # Consider the kmer by base, stop if the current sum is less than the max prob
         j = 0
-        score = 1
+        prob = 1
         while j < int(k):
 
-            # Multiple the score by the profile probability of the current j index and observed base
-            score *= profile[j][genome[i+j]]
+            # Multiple the prob by the profile probability of the current j index and observed base
+            try:
+                prob *= profile[j][genome[i+j]]
+            except KeyError:
+                prob = 0
 
-            # If score probability is less than the max_score, stop processing kmer
-            if score < max_score[0]:
+            # If prob probability is less than the max_prob, stop processing kmer
+            if prob < max_prob[0]:
                 j = k
             j += 1
 
-        # If score exceeded the max_score replace with the current kmer and its probability
-        if score > max_score[0]:
-            max_score = (score, genome[i:i+int(k)])
+        # If prob exceeded the max_prob replace with the current kmer and its probability
+        if prob > max_prob[0]:
+            max_prob = (prob, genome[i:i+int(k)])
         i += 1
 
-    return max_score[1]
+    return max_prob[1]
 
 
 def get_profile_dict(profile_matrix):
@@ -168,7 +170,6 @@ def get_profile_dict(profile_matrix):
     matrix = []
     for row in profile_matrix:
         matrix.append([float(f) for f in row.split()])
-
 
     # Process by column
     j = 0
@@ -188,7 +189,108 @@ def get_profile_dict(profile_matrix):
     return profile
 
 
+def greedy_motif_search(genomes, k, laplace=False):
+    """
+    Greedy algorithm solution to motif finding; find T motifs that
+    produce the lowest score for the genome.
+    :param genomes: set of genome strings
+    :param k: length of kmers
+    :param laplace: smoothing parameter for profiles
+    :return: set of motifs with the lowest score
+    """
+    # Build initial best motifs from first kmers of each line
+    best_motifs = dict((i, {}) for i in range(0, int(k)))
+    i = 0
+    while i < len(genomes):
+        j = 0
+        while j < int(k):
+            best_motifs[j][i] = genomes[i][j]
+            j += 1
+        i += 1
+    best_score = score_matrix(best_motifs)
+
+    # Iterate through each kmer in the first genome string
+    j = 0
+    while j < len(genomes[0]) - int(k) + 1:
+        # Set motif matrix to the first genome string's kmer
+        motifs = dict((i, {0: genomes[0][j+i]}) for i in range(0, int(k)))
+
+        # Iterate through each following genome string and update the motif and profile matrices
+        i = 1
+        while i < len(genomes):
+            new_motif = most_probable_in_profile(genomes[i], int(k), build_profile(motifs, laplace))
+            for x in range(0, int(k)):
+                motifs[x][i] = new_motif[x]
+            i += 1
+
+        # If the score for the motifs is better than the best score set motifs as the best motifs
+        if score_matrix(motifs) < best_score:
+            best_motifs = motifs
+            best_score = score_matrix(motifs)
+
+        j += 1
+
+    return convert_matrix_to_tuple(best_motifs)
+
+
+def build_profile(motif_matrix, laplace=False):
+    """
+    Convert a motif_matrix to a profile matrix dict with probabilities.
+    :param motif_matrix: a motif matrix in dictionary form
+    :param laplace: smoothing parameter for profiles
+    :return: profile matrix in dictionary form
+    """
+    profile = {}
+    for col in motif_matrix:
+
+        # Collect the distribution of bases for the column
+        distr = dict((b, 1) for b in BASES) if laplace else {}
+        for row in motif_matrix[col]:
+            distr[motif_matrix[col][row]] = distr.get(motif_matrix[col][row], 0) + 1
+
+        # Convert the distributions into probabilities
+        for base in distr:
+            distr[base] = distr.get(base, 0) / (len(motif_matrix[col]) + 4 if laplace else len(motif_matrix[col]))
+
+        profile[col] = copy.deepcopy(distr)
+
+    return profile
+
+
+def score_matrix(motif_matrix):
+    """
+    Take a motif matrix in dictionary form {column: {row: base}} and
+    output the score for the motif matrix.
+    :param motif_matrix: a motif matrix in dictionary form
+    :return: score for the motif matrix
+    """
+    score = 0
+    for col in motif_matrix:
+
+        # Collect the distribution of bases for the column
+        distr = {}
+        for row in motif_matrix[col]:
+            distr[motif_matrix[col][row]] = distr.get(motif_matrix[col][row], 0) + 1
+
+        # Score by taking the total rows less the count of the most frequent base
+        score += (len(motif_matrix[col]) - distr[max(distr, key=distr.get)])
+    return score
+
+
+def convert_matrix_to_tuple(motif_matrix):
+    """
+    Take a motif matrix in dictionary form {column: {row: base}} and
+    output a tuple of the motifs
+    :param motif_matrix: a motif matrix in dictionary form
+    :return: tuple of motifs
+    """
+    motifs = {}
+    for col in sorted(motif_matrix.keys()):
+        for row in motif_matrix[col]:
+            motifs[row] = motifs.get(row, '') + motif_matrix[col][row]
+    return tuple(v for k, v in sorted(motifs.items()))
+
+
 lines = sys.stdin.read().splitlines()
-genome = lines[0]
-k = int(lines[1])
-print(most_probable_in_profile(genome, k, lines[2:]))
+k, t = lines[0].split()
+print('\n'.join(greedy_motif_search(lines[1:], int(k), True)))
