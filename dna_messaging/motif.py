@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import copy
+import random
 import sys
 
 from dna_messaging.constants import BASES, PROFILE_INDEX
@@ -138,7 +139,7 @@ def most_probable_in_profile(genome, k, profile):
         prob = 1
         while j < int(k):
 
-            # Multiple the prob by the profile probability of the current j index and observed base
+            # Multiply the prob by the profile probability of the current j index and observed base
             try:
                 prob *= profile[j][genome[i+j]]
             except KeyError:
@@ -233,6 +234,61 @@ def greedy_motif_search(genomes, k, laplace=False):
     return convert_matrix_to_tuple(best_motifs)
 
 
+def randomized_motif_search(genomes, k, laplace=False, trials=1000):
+    """
+    Randomized algorithm solution to motif finding; find T motifs that
+    produce the lowest score for the genome.
+    :param genomes: set of genome strings
+    :param k: length of kmers
+    :param laplace: smoothing parameter for profiles
+    :param trials: number of times the random search will be completed
+    :return: set of motifs with the lowest score
+    """
+    best_score = sys.maxsize
+    best_motifs = {}
+
+    # Process each trial
+    for t in range(0, int(trials)):
+
+        # Build initial best motifs from random kmers of each line
+        motifs = dict((i, {}) for i in range(0, int(k)))
+        i = 0
+        while i < len(genomes):
+            r = random.randint(0, len(genomes[i]) - int(k))
+            j = 0
+            while j < int(k):
+                motifs[j][i] = genomes[i][r+j]
+                j += 1
+            i += 1
+
+        # Iteratively find the most probable motifs given the previous profile until the score cannot be improved
+        while motifs:
+            profile = build_profile(motifs, laplace)
+
+            # Iterate through each following genome string and update the motif
+            i = 0
+            new_motifs = dict((i, {}) for i in range(0, int(k)))
+            while i < len(genomes):
+                new_motif = most_probable_in_profile(genomes[i], int(k), profile)
+                for x in range(0, int(k)):
+                    new_motifs[x][i] = new_motif[x]
+                i += 1
+
+            # If the score for the motifs is better than the best score set motifs as the best motifs
+            if score_matrix(new_motifs) < score_matrix(motifs):
+                motifs = new_motifs
+
+            # A better motif matrix was not found so terminate this trial
+            else:
+                # If this trial did better than all other previous trials record motifs and score
+                if score_matrix(motifs) < best_score:
+                    best_motifs = motifs
+                    best_score = score_matrix(motifs)
+                motifs = None
+
+    return convert_matrix_to_tuple(best_motifs)
+
+
 def build_profile(motif_matrix, laplace=False):
     """
     Convert a motif_matrix to a profile matrix dict with probabilities.
@@ -293,4 +349,5 @@ def convert_matrix_to_tuple(motif_matrix):
 
 lines = sys.stdin.read().splitlines()
 k, t = lines[0].split()
-print('\n'.join(greedy_motif_search(lines[1:], int(k), True)))
+res = randomized_motif_search(lines[1:], int(k), True, trials=1000)
+print('\n'.join(res))

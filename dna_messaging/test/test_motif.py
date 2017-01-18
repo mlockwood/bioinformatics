@@ -40,6 +40,13 @@ GENOMES4 = [
     'GCCAACGTAGGCGCGGCTTGGCATCTCGGTGTGTGAAGCG',
     'AAAGGCGCATCTTACTCTTTTCGCTTTCAAAAAAAAATTG'
 ]
+GENOMES5 = [
+    'CGCCCCTCTCGGGGGTGTTCAGTAAACGGCCA',
+    'GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG',
+    'TAGTACCGAGACCGAAAGAAGTATACAGGCGT',
+    'TAGATCAAGTTTCAGGTGCACGTCGGTGAACC',
+    'AATCCACCAGCTCCACGTGCAATGTTGGCCTA'
+]
 MOTIF1 = {
     0: {0: 'A', 1: 'G', 2: 'G', 3: 'C'},
     1: {0: 'T', 1: 'G', 2: 'T', 3: 'T'},
@@ -97,6 +104,10 @@ class TestGreedyMotifSearch:
                                                           'GGCGC')
 
 
+def test_randomized_motif_search():
+    assert randomized_motif_search(GENOMES5, 8, True) == ('TCTCGGGG', 'CCAAGGTG', 'TACAGGCG', 'TTCAGGTG', 'TCCACGTG')
+
+
 def test_build_profile():
     assert build_profile(MOTIF1) == {
         0: {'A': 0.25, 'C': 0.25, 'G': 0.5},
@@ -107,6 +118,7 @@ def test_build_profile():
 
 def test_score_matrix():
     assert score_matrix(MOTIF1) == 5
+    assert score_matrix(MOTIF2) == 2
 
 
 def test_convert_matrix_to_tuple():
