@@ -190,7 +190,7 @@ def get_profile_dict(profile_matrix):
     return profile
 
 
-def greedy_motif_search(genomes, k, laplace=False):
+def greedy_motif_search(genomes, k, laplace=True):
     """
     Greedy algorithm solution to motif finding; find T motifs that
     produce the lowest score for the genome.
@@ -234,7 +234,7 @@ def greedy_motif_search(genomes, k, laplace=False):
     return convert_matrix_to_tuple(best_motifs)
 
 
-def randomized_motif_search(genomes, k, laplace=False, trials=1000):
+def randomized_motif_search(genomes, k, laplace=True, trials=1000):
     """
     Randomized algorithm solution to motif finding; find T motifs that
     produce the lowest score for the genome.
@@ -289,7 +289,58 @@ def randomized_motif_search(genomes, k, laplace=False, trials=1000):
     return convert_matrix_to_tuple(best_motifs)
 
 
-def build_profile(motif_matrix, laplace=False):
+def randomized_gibbs_motif_search(genomes, k, gibbs=100, laplace=True, trials=1000):
+    """
+    Randomized algorithm solution to motif finding; find T motifs that
+    produce the lowest score for the genome.
+    :param genomes: set of genome strings
+    :param k: length of kmers
+    :param gibbs: number of times the gibbs search is run
+    :param laplace: smoothing parameter for profiles
+    :param trials: number of times the random search will be completed
+    :return: set of motifs with the lowest score
+    """
+    best_score = sys.maxsize
+    best_motifs = {}
+
+    # Process each trial
+    for t in range(0, int(trials)):
+
+        # Build initial best motifs from random kmers of each line
+        motifs = dict((i, {}) for i in range(0, int(k)))
+        i = 0
+        while i < len(genomes):
+            r = random.randint(0, len(genomes[i]) - int(k))
+            j = 0
+            while j < int(k):
+                motifs[j][i] = genomes[i][r+j]
+                j += 1
+            i += 1
+
+        # Iteratively find the most probable motifs given the previous profile until the score cannot be improved
+        for g in range(0, int(gibbs)):
+            # Select a random line for which to replace using an updated profile matrix
+            r = random.randint(0, len(genomes))
+
+            # Delete entries of randomly selected line
+            for col in motifs:
+                del motifs[col][r]
+
+            # Build a profile from the new motifs and select a new best motif from the randomly selected line
+            new_motif = most_probable_in_profile(genomes[r], int(k), build_profile(motifs, laplace))
+            for x in range(0, int(k)):
+                motifs[x][i] = new_motif[x]
+            i += 1
+
+            # If the score for the motifs is better than the best score set motifs as the best motifs
+            if score_matrix(motifs) < best_score:
+                best_motifs = motifs
+                best_score = score_matrix(motifs)
+
+    return convert_matrix_to_tuple(best_motifs)
+
+
+def build_profile(motif_matrix, laplace=True):
     """
     Convert a motif_matrix to a profile matrix dict with probabilities.
     :param motif_matrix: a motif matrix in dictionary form

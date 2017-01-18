@@ -86,7 +86,7 @@ def test_get_profile_dict():
 class TestGreedyMotifSearch:
 
     def test_without_laplace(self):
-        assert greedy_motif_search(GENOMES1, 3) == ('CAG', 'CAG', 'CAA', 'CAA', 'CAA')
+        assert greedy_motif_search(GENOMES1, 3, False) == ('CAG', 'CAG', 'CAA', 'CAA', 'CAA')
 
     def test_with_laplace(self):
         assert greedy_motif_search(GENOMES1, 3, True) == ('TTC', 'ATC', 'TTC', 'ATC', 'TTC')
