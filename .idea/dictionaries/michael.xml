@@ -2,6 +2,7 @@
   <dictionary name="michael">
     <words>
       <w>kmer</w>
+      <w>probs</w>
     </words>
   </dictionary>
 </component>

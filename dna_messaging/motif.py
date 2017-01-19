@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import copy
+from numpy.random import choice
 import random
 import sys
 
@@ -117,45 +118,6 @@ def median_string(genomes, k):
             kmers[kmer] = kmers.get(kmer, 0) + lookup[kmer]
 
     return min(kmers, key=kmers.get)
-
-
-def most_probable_in_profile(genome, k, profile):
-    """
-    Find the most probably motif given a profile matrix and a length of
-    k within the genome.
-    :param genome: genome string
-    :param k: length of kmers/motif
-    :param profile_matrix: profile probabilities for each base
-    :return: most probable motif
-    """
-    max_prob = (0, genome[:int(k)])
-
-    # Explore the genome by kmer of length k for each index until the end
-    i = 0
-    while i < len(genome) - int(k) + 1:
-
-        # Consider the kmer by base, stop if the current sum is less than the max prob
-        j = 0
-        prob = 1
-        while j < int(k):
-
-            # Multiply the prob by the profile probability of the current j index and observed base
-            try:
-                prob *= profile[j][genome[i+j]]
-            except KeyError:
-                prob = 0
-
-            # If prob probability is less than the max_prob, stop processing kmer
-            if prob < max_prob[0]:
-                j = k
-            j += 1
-
-        # If prob exceeded the max_prob replace with the current kmer and its probability
-        if prob > max_prob[0]:
-            max_prob = (prob, genome[i:i+int(k)])
-        i += 1
-
-    return max_prob[1]
 
 
 def get_profile_dict(profile_matrix):
@@ -317,27 +279,109 @@ def randomized_gibbs_motif_search(genomes, k, gibbs=100, laplace=True, trials=10
                 j += 1
             i += 1
 
-        # Iteratively find the most probable motifs given the previous profile until the score cannot be improved
+        # Replace one motif at a time by random selection for gibbs number of times
         for g in range(0, int(gibbs)):
             # Select a random line for which to replace using an updated profile matrix
-            r = random.randint(0, len(genomes))
+            r = random.randint(0, len(genomes) - 1)
 
-            # Delete entries of randomly selected line
+            # Delete existing kmer motif of randomly selected line
             for col in motifs:
                 del motifs[col][r]
 
-            # Build a profile from the new motifs and select a new best motif from the randomly selected line
-            new_motif = most_probable_in_profile(genomes[r], int(k), build_profile(motifs, laplace))
+            # Build a profile from the motifs and select a new best motif from the randomly selected line
+            new_motif = random_probable_in_profile(genomes[r], int(k), build_profile(motifs, laplace))
             for x in range(0, int(k)):
-                motifs[x][i] = new_motif[x]
-            i += 1
+                motifs[x][r] = new_motif[x]
 
             # If the score for the motifs is better than the best score set motifs as the best motifs
             if score_matrix(motifs) < best_score:
-                best_motifs = motifs
+                best_motifs = copy.deepcopy(motifs)
                 best_score = score_matrix(motifs)
 
     return convert_matrix_to_tuple(best_motifs)
+
+
+def most_probable_in_profile(genome, k, profile):
+    """
+    Find the most probably motif given a profile matrix and a length of
+    k within the genome.
+    :param genome: genome string
+    :param k: length of kmers/motif
+    :param profile_matrix: profile probabilities for each base
+    :return: most probable motif
+    """
+    max_prob = (0, genome[:int(k)])
+
+    # Explore the genome by kmer of length k for each index until the end
+    i = 0
+    while i < len(genome) - int(k) + 1:
+
+        # Consider the kmer by base, stop if the current sum is less than the max prob
+        j = 0
+        prob = 1
+        while j < int(k):
+
+            # Multiply the prob by the profile probability of the current j index and observed base
+            try:
+                prob *= profile[j][genome[i+j]]
+            except KeyError:
+                prob = 0
+
+            # If prob probability is less than the max_prob, stop processing kmer
+            if prob < max_prob[0]:
+                j = k
+            j += 1
+
+        # If prob exceeded the max_prob replace with the current kmer and its probability
+        if prob > max_prob[0]:
+            max_prob = (prob, genome[i:i+int(k)])
+        i += 1
+
+    return max_prob[1]
+
+
+def random_probable_in_profile(genome, k, profile):
+    """
+    Find a random motif given probabilities of a profile matrix and a
+    length of k within the genome.
+    :param genome: genome string
+    :param k: length of kmers/motif
+    :param profile_matrix: profile probabilities for each base
+    :return: random probable motif
+    """
+    kmers = []
+    probs = []
+    total = 0.0
+
+    # Explore the genome by kmer of length k for each index until the end
+    i = 0
+    while i < len(genome) - int(k) + 1:
+
+        # Consider the kmer by base, stop if the current sum is less than the max prob
+        j = 0
+        prob = 1
+        while j < int(k):
+
+            # Multiply the prob by the profile probability of the current j index and observed base
+            try:
+                prob *= profile[j][genome[i+j]]
+            except KeyError:
+                prob = 0
+
+            j += 1
+
+        # Add kmer and probability to lists
+        kmers.append(genome[i:i+k])
+        probs.append(prob)
+        total += prob
+        i += 1
+
+    # Normalize probabilities
+    normalized_probs = []
+    for prob in probs:
+        normalized_probs.append(prob/total)
+
+    return choice(kmers, p=normalized_probs)
 
 
 def build_profile(motif_matrix, laplace=True):
@@ -399,6 +443,6 @@ def convert_matrix_to_tuple(motif_matrix):
 
 
 lines = sys.stdin.read().splitlines()
-k, t = lines[0].split()
-res = randomized_motif_search(lines[1:], int(k), True, trials=1000)
+k, t, gibbs = lines[0].split()
+res = randomized_gibbs_motif_search(lines[1:], int(k), gibbs=gibbs, laplace=True, trials=20)
 print('\n'.join(res))

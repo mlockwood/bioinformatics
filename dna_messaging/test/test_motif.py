@@ -47,6 +47,13 @@ GENOMES5 = [
     'TAGATCAAGTTTCAGGTGCACGTCGGTGAACC',
     'AATCCACCAGCTCCACGTGCAATGTTGGCCTA'
 ]
+GENOMES6 = [
+    'CGCCCCTCTCGGGGGTGTTCAGTAACCGGCCA',
+    'GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG',
+    'TAGTACCGAGACCGAAAGAAGTATACAGGCGT',
+    'TAGATCAAGTTTCAGGTGCACGTCGGTGAACC',
+    'AATCCACCAGCTCCACGTGCAATGTTGGCCTA'
+]
 MOTIF1 = {
     0: {0: 'A', 1: 'G', 2: 'G', 3: 'C'},
     1: {0: 'T', 1: 'G', 2: 'T', 3: 'T'},
@@ -68,11 +75,6 @@ def test_median_string():
     assert median_string(['AAATTGACGCAT', 'GACGACCACGTT', 'CGTCAGCGCCTG', 'GCTGAGCACCGG', 'AGTTCGGGACAG'], 3) == 'GAC'
 
 
-def test_most_probable_in_profile():
-    assert most_probable_in_profile('ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT', 5, get_profile_dict(PROFILE)
-                                    ) == 'CCGAG'
-
-
 def test_get_profile_dict():
     assert get_profile_dict(PROFILE) == {
         0: {'A': 0.2, 'C': 0.4, 'G': 0.3, 'T': 0.1},
@@ -86,30 +88,46 @@ def test_get_profile_dict():
 class TestGreedyMotifSearch:
 
     def test_without_laplace(self):
-        assert greedy_motif_search(GENOMES1, 3, False) == ('CAG', 'CAG', 'CAA', 'CAA', 'CAA')
+        assert greedy_motif_search(GENOMES1, 3, laplace=False) == ('CAG', 'CAG', 'CAA', 'CAA', 'CAA')
 
     def test_with_laplace(self):
-        assert greedy_motif_search(GENOMES1, 3, True) == ('TTC', 'ATC', 'TTC', 'ATC', 'TTC')
+        assert greedy_motif_search(GENOMES1, 3) == ('TTC', 'ATC', 'TTC', 'ATC', 'TTC')
 
     def test_off_by_one_error_at_start(self):
-        assert greedy_motif_search(GENOMES2, 5, True) == ('AGGCG', 'ATCCG', 'AAGCG', 'AGTCG', 'AACCG', 'AGGCG', 'AGGCG',
-                                                          'AGGCG')
+        assert greedy_motif_search(GENOMES2, 5) == ('AGGCG', 'ATCCG', 'AAGCG', 'AGTCG', 'AACCG', 'AGGCG', 'AGGCG',
+                                                    'AGGCG')
 
     def test_off_by_one_error_at_end(self):
-        assert greedy_motif_search(GENOMES3, 5, True) == ('AGGCG', 'TGGCA', 'AAGCG', 'AGGCA', 'CGGCA', 'AGGCG', 'AGGCG',
-                                                          'AGGCG')
+        assert greedy_motif_search(GENOMES3, 5) == ('AGGCG', 'TGGCA', 'AAGCG', 'AGGCA', 'CGGCA', 'AGGCG', 'AGGCG',
+                                                    'AGGCG')
 
     def test_profile_tiebreaking(self):
-        assert greedy_motif_search(GENOMES4, 5, True) == ('GGCGG', 'GGCTC', 'GGCGG', 'GGCAG', 'GACGG', 'GACGG', 'GGCGC',
-                                                          'GGCGC')
+        assert greedy_motif_search(GENOMES4, 5) == ('GGCGG', 'GGCTC', 'GGCGG', 'GGCAG', 'GACGG', 'GACGG', 'GGCGC',
+                                                    'GGCGC')
 
 
 def test_randomized_motif_search():
-    assert randomized_motif_search(GENOMES5, 8, True) == ('TCTCGGGG', 'CCAAGGTG', 'TACAGGCG', 'TTCAGGTG', 'TCCACGTG')
+    assert randomized_motif_search(GENOMES5, 8, trials=10000) == ('TCTCGGGG', 'CCAAGGTG', 'TACAGGCG', 'TTCAGGTG',
+                                                                  'TCCACGTG')
+
+
+def test_randomized_gibbs_motif_search():
+    assert randomized_gibbs_motif_search(GENOMES6, 8, gibbs=100, laplace=True, trials=100) == (
+        'TCTCGGGG',
+        'CCAAGGTG',
+        'TACAGGCG',
+        'TTCAGGTG',
+        'TCCACGTG'
+    )
+
+
+def test_most_probable_in_profile():
+    assert most_probable_in_profile('ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT', 5, get_profile_dict(PROFILE)
+                                    ) == 'CCGAG'
 
 
 def test_build_profile():
-    assert build_profile(MOTIF1) == {
+    assert build_profile(MOTIF1, laplace=False) == {
         0: {'A': 0.25, 'C': 0.25, 'G': 0.5},
         1: {'G': 0.25, 'T': 0.75},
         2: {'G': 0.5, 'T': 0.5},
