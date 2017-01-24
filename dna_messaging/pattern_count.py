@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys
+import math
 
+from dna_messaging.constants import CONVERT, PROFILE_INDEX
 from dna_messaging.generic import *
 from dna_messaging.reverse_complement import reverse_complement
 
@@ -74,8 +75,8 @@ def clump_finding(genome, k, L, t):
         lookup[i] = kmer
 
         # Remove the kmer that became out of window
-        if i >= L:
-            del window[lookup[i-L]][i-L]
+        if i >= (L-k+1):
+            del window[lookup[i-(L-k+1)]][i-(L-k+1)]
 
         # Add kmer to results if there are at least 't' occurrences within the range
         if len(window[kmer]) >= t:
@@ -89,7 +90,7 @@ def clump_finding(genome, k, L, t):
 def approximate_pattern_match(kmer, genome, d):
     """
     Find the indices where the kmer appears in the genome with a
-    hamming distance up to `d`
+    hamming distance up to `d`.
     :param kmer: kmer string
     :param genome: genome string
     :param d: maximum distance value
@@ -107,7 +108,7 @@ def approximate_pattern_match(kmer, genome, d):
 def count_approximate_pattern_matches(kmer, genome, d):
     """
     Find the count of how often the kmer appears in the genome with a
-    hamming distance up to `d`
+    hamming distance up to `d`.
     :param kmer: kmer string
     :param genome: genome string
     :param d: maximum distance value
@@ -118,7 +119,7 @@ def count_approximate_pattern_matches(kmer, genome, d):
 
 def get_kmer_counts(genome, k, d=0, rc=False):
     """
-    Find counts for all approximate kmers
+    Find counts for all approximate kmers.
     :param genome: genome string
     :param k: k-mer size
     :param d: maximum distance value
@@ -170,7 +171,6 @@ def get_frequent_kmers(genome, k, d=0, rc=False):
     :param k: length of k-mer
     :param d: maximum hamming distance value if approximate method
     :param rc: reverse compliment processing
-    :param approx: whether the kmers are absolute or approximate
     :return: space delimited list of the most frequent kmers
     """
     kmers = get_kmer_counts(genome, int(k), int(d), rc)
@@ -178,6 +178,46 @@ def get_frequent_kmers(genome, k, d=0, rc=False):
     return ' '.join(sorted([k for k, v in kmers.items() if v == value]))
 
 
-if __name__ == "__main__":
-    # lines = sys.stdin.read().splitlines()
-    print(count_approximate_pattern_matches('CCC', 'CATGCCATTCGCATTGTCCCAGTGA', 2))
+def computing_frequencies(genome, k):
+    """
+    Frequency array for k-mers in a genome. This is inefficient and is
+    not used as a part of any of the algorithms herein.
+    :param genome: genome string
+    :param k: length of k-mer
+    :return: space delimited list of the frequencies for each k-mer
+    """
+    kmers = get_all_kmers(int(k))
+    i = 0
+    while i <= len(genome) - int(k):
+        kmers[genome[i:i+int(k)]] = kmers.get(genome[i:i+int(k)], 0) + 1
+        i += 1
+
+    frequencies = []
+    for kmer in sorted(kmers.keys()):
+        frequencies.append(kmers[kmer])
+    return frequencies
+
+
+def pattern_to_number(pattern):
+    """
+    Assign a number to the pattern for its given lexigraphical position
+    against all alphabetically sorted k-mers of the same length.
+    :param pattern: k-mer pattern
+    :return: lexigraphic position number
+    """
+    if not pattern:
+        return 0
+    return pattern_to_number(pattern[:-1]) * 4 + CONVERT[pattern[-1]]
+
+
+def number_to_pattern(number, k):
+    """
+    Take a lexigraphical position number and return the k-mer it
+    represents.
+    :param number: lexigraphic position number
+    :param k: length of k-mer
+    :return: k-mer
+    """
+    if int(k) == 1:
+        return PROFILE_INDEX[int(number)]
+    return number_to_pattern(math.floor(int(number) / 4), int(k) - 1) + PROFILE_INDEX[int(number) % 4]

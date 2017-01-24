@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys
-
-
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
@@ -18,6 +15,3 @@ def reverse_complement(string):
         i -= 1
     return text
 
-
-# lines = sys.stdin.read().splitlines()
-# print(reverse_complement(*lines))

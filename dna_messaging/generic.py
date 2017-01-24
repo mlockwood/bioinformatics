@@ -61,7 +61,7 @@ def get_all_mismatched_kmers(pattern, d, kmer=''):
     # Recurse another layer (length) for each base in BASES
     else:
         # If the maximum amount of distance has been reached, only pursue the base that matches pattern for index
-        if hamming_distance(pattern[:len(kmer)], kmer) == d:
+        if hamming_distance(pattern[:len(kmer)], kmer) == int(d):
             kmers.update(get_all_mismatched_kmers(pattern, d, '{}{}'.format(kmer, pattern[len(kmer)])))
 
         # Otherwise seek all base options

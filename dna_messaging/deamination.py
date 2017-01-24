@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys
-
-
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
@@ -62,9 +59,3 @@ def find_max_skews(genome):
             max_skews.append(i+1)
         i += 1
     return ' '.join(str(i) for i in max_skews)
-
-
-if __name__ == "__main__":
-    # lines = sys.stdin.read().splitlines()
-    # print(find_min_skews(*lines))
-    print(find_max_skews('CATTCCAGTACTTCATGATGGCGTGAAGA'))
