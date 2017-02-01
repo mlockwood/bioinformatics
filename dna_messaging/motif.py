@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import copy
-from numpy.random import choice
 import random
 import sys
 
+from numpy.random import choice
+
 from dna_messaging.constants import BASES, PROFILE_INDEX
-from dna_messaging.generic import get_all_mismatched_kmers, hamming_distance
+from generic import get_all_mismatched_kmers, hamming_distance
 
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'

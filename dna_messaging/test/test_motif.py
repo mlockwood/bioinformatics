@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import pytest
+
 from dna_messaging.motif import *
 
 
@@ -67,6 +69,12 @@ MOTIF2 = {
 PROFILE = ['0.2 0.2 0.3 0.2 0.3', '0.4 0.3 0.1 0.5 0.1', '0.3 0.3 0.5 0.2 0.4', '0.1 0.2 0.1 0.1 0.2']
 
 
+slow = pytest.mark.skipif(
+    not pytest.config.getoption("--runslow"),
+    reason="need --runslow option to run"
+)
+
+
 def test_motif_enumerations():
     assert motif_enumerations(['ATTTGGC', 'TGCCTTA', 'CGGTATC', 'GAAAATT'], 3, 1) == 'ATA ATT GTT TTT'
 
@@ -106,11 +114,13 @@ class TestGreedyMotifSearch:
                                                     'GGCGC')
 
 
+@slow
 def test_randomized_motif_search():
     assert randomized_motif_search(GENOMES5, 8, trials=10000) == ('TCTCGGGG', 'CCAAGGTG', 'TACAGGCG', 'TTCAGGTG',
                                                                   'TCCACGTG')
 
 
+@slow
 def test_randomized_gibbs_motif_search():
     assert randomized_gibbs_motif_search(GENOMES6, 8, gibbs=100, laplace=True, trials=100) == (
         'TCTCGGGG',

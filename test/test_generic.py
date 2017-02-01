@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from dna_messaging.generic import *
+from generic import *
 
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
@@ -20,3 +20,11 @@ def test_hamming_distance():
 
 def test_get_all_mismatched_kmers():
     assert set(get_all_mismatched_kmers('AA', 1)) == {'AA', 'AC', 'AG', 'AT', 'CA', 'GA', 'TA'}
+
+
+def test_lines_to_graph_dict():
+    assert lines_to_graph_dict(['0 -> 1,2', '1 -> 0', '2 -> 0']) == {
+        '0': {'1': True, '2': True},
+        '1': {'0': True},
+        '2': {'0': True}
+    }

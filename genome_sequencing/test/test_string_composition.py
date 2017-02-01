@@ -1,9 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from generic import *
+from genome_sequencing.string_composition import *
+
+
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
-
-
-from genome_sequencing.string_composition import *
 
 
 def test_string_composition():
@@ -37,3 +41,21 @@ def test_de_bruijn_graph_from_string():
 def test_de_bruijn_graph_by_composition():
     assert de_bruijn_graph_by_composition('GAGG\nCAGG\nGGGG\nGGGA\nCAGG\nAGGG\nGGAG\n'
                                           ) == 'AGG -> GGG\nCAG -> AGG,AGG\nGAG -> AGG\nGGA -> GAG\nGGG -> GGA,GGG\n'
+
+
+def test_eulerian_cycle():
+    """
+    This can produce many different acceptable outputs so the test may fail but not actually prove an error in code.
+    """
+    assert eulerian_cycle(lines_to_graph_dict([
+        '0 -> 3',
+        '1 -> 0',
+        '2 -> 1,6',
+        '3 -> 2',
+        '4 -> 2',
+        '5 -> 4',
+        '6 -> 5,8',
+        '7 -> 9',
+        '8 -> 7',
+        '9 -> 6'
+    ])) == ('6->8->7->9->6->5->4->2->1->0->3->2->6' or '9->6->5->4->2->1->0->3->2->6->8->7->9')

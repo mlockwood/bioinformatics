@@ -1,15 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+
+from generic import *
+
+
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
-import sys
-
-
 def string_composition(k, text):
     """
     Produce a set of all k-mer nucleotide sequences in the text.
-    :param k: length of nucleotide strings
+    :param k: length of nucleotide strings.
     :param text: genome text
     :return: a set of all k-mer nucleotides for the text
     """
@@ -37,7 +42,7 @@ def string_reconstruction_pre_ordered(kmers):
 
 def get_prefix(kmer):
     """
-    Return the prefix of a kmer
+    Return the prefix of a kmer.
     :param kmer: string of nucleotides
     :return: prefix of the kmer
     """
@@ -46,7 +51,7 @@ def get_prefix(kmer):
 
 def get_suffix(kmer):
     """
-    Return the suffix of a kmer
+    Return the suffix of a kmer.
     :param kmer: string of nucleotides
     :return: suffix of the kmer
     """
@@ -133,5 +138,41 @@ def print_de_bruijn_graph(graph):
     return result
 
 
-#lines = sys.stdin.read()
-#print(de_bruijn_graph_by_composition(lines))
+def eulerian_cycle(graph):
+    """
+    Traverse a Eulerian graph to find a cycle where each edge is
+    visited exactly once.
+    :param graph: {node: {to_nodes: True}}
+    :return: string representation of a path
+    """
+    cycle = [next(iter(graph))]
+
+    while graph:
+        # If there are more to_nodes for the last node in the cycle, continue
+        if cycle[-1] in graph:
+            cycle.append(next(iter(graph[cycle[-1]])))
+            del graph[cycle[-2]][cycle[-1]]
+
+            # Remove nodes completely if they have no more to_nodes
+            if not graph[cycle[-2]]:
+                del graph[cycle[-2]]
+
+        # If there are no more to_nodes choose a new_start location
+        else:
+            i = 0
+            while i < len(cycle):
+                # If a node has to_nodes restructure cycle to start at this node
+                if cycle[i] in graph:
+                    cycle = cycle[i:-1] + cycle[0:i+1]
+                    i = len(cycle)
+                i += 1
+
+            # If no new start was chosen the graph is not Eulerian
+            if i == len(cycle):
+                raise ValueError('Graph is not Eulerian.')
+
+    return '->'.join(cycle)
+
+
+lines = sys.stdin.read().splitlines()
+print(eulerian_cycle(lines_to_graph_dict(lines)))

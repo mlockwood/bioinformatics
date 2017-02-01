@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import re
+
 from dna_messaging.constants import BASES
 
 
@@ -69,3 +71,27 @@ def get_all_mismatched_kmers(pattern, d, kmer=''):
             for base in BASES:
                 kmers.update(get_all_mismatched_kmers(pattern, d, '{}{}'.format(kmer, base)))
         return kmers
+
+
+def lines_to_graph_dict(lines):
+    """
+    Take a graph composed of line delimited x -> y, z node to node(s)
+    and convert this to a dictionary representation of
+    {node: {to_node: True}}.
+    :param lines: list of string representations of the graph nodes
+    :return: graph dictionary
+    """
+    graph = {}
+    for line in lines:
+        # Split the line into the first node left of the -> and a list of to_nodes from the right
+        node, to_nodes = re.split('->', re.sub('\s', '', line))
+
+        # If the node has not been seen already add it to the graph with a value of an empty dict
+        if node not in graph:
+            graph[node] = {}
+
+        # Set each to_node for the node
+        for to_node in re.split(',', to_nodes):
+            graph[node][to_node] = True
+
+    return graph
