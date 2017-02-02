@@ -43,19 +43,33 @@ def test_de_bruijn_graph_by_composition():
                                           ) == 'AGG -> GGG\nCAG -> AGG,AGG\nGAG -> AGG\nGGA -> GAG\nGGG -> GGA,GGG\n'
 
 
-def test_eulerian_cycle():
-    """
-    This can produce many different acceptable outputs so the test may fail but not actually prove an error in code.
-    """
-    assert eulerian_cycle(lines_to_graph_dict([
-        '0 -> 3',
-        '1 -> 0',
-        '2 -> 1,6',
-        '3 -> 2',
-        '4 -> 2',
-        '5 -> 4',
-        '6 -> 5,8',
-        '7 -> 9',
-        '8 -> 7',
-        '9 -> 6'
-    ])) == ('6->8->7->9->6->5->4->2->1->0->3->2->6' or '9->6->5->4->2->1->0->3->2->6->8->7->9')
+class TestEulerianPath:
+
+    def test_eulerian_cycle(self):
+        """
+        This can produce many different acceptable outputs so the test may fail but not actually prove an error in code.
+        """
+        assert eulerian_path(lines_to_graph_dict([
+            '0 -> 3',
+            '1 -> 0',
+            '2 -> 1,6',
+            '3 -> 2',
+            '4 -> 2',
+            '5 -> 4',
+            '6 -> 5,8',
+            '7 -> 9',
+            '8 -> 7',
+            '9 -> 6'
+        ])) == ('6->8->7->9->6->5->4->2->1->0->3->2->6' or '9->6->5->4->2->1->0->3->2->6->8->7->9')
+
+    def test_eulerian_path(self):
+        assert eulerian_path(lines_to_graph_dict([
+            '0 -> 2',
+            '1 -> 3',
+            '2 -> 1',
+            '3 -> 0,4',
+            '6 -> 3,7',
+            '7 -> 8',
+            '8 -> 9',
+            '9 -> 6'
+        ]), nearly=True) == '6->7->8->9->6->3->0->2->1->3->4'

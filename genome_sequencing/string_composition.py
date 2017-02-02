@@ -138,13 +138,42 @@ def print_de_bruijn_graph(graph):
     return result
 
 
-def eulerian_cycle(graph):
+def eulerian_path(graph, nearly=False):
     """
     Traverse a Eulerian graph to find a cycle where each edge is
     visited exactly once.
     :param graph: {node: {to_nodes: True}}
+    :param nearly: if graph is nearly balanced will find Eulerian path
     :return: string representation of a path
     """
+    if nearly:
+        # Count the balance of edges at each node
+        counts = {}
+        for node in graph:
+            # Add for the from node
+            if node not in counts:
+                counts[node] = {'from': len(graph[node]), 'to': 0}
+            else:
+                counts[node]['from'] = len(graph[node])
+
+            # Add for each to node
+            for to_node in graph[node]:
+                if to_node not in counts:
+                    counts[to_node] = {'from': 0, 'to': 1}
+                else:
+                    counts[to_node]['to'] = counts[to_node].get('to', 0) + 1
+
+        # Find the missing edge, note it then add to graph
+        for node in counts:
+            if counts[node]['from'] < counts[node]['to']:
+                from_node = node
+            elif counts[node]['from'] > counts[node]['to']:
+                to_node = node
+        final_edge = [from_node, to_node]
+        if from_node not in graph:
+            graph[from_node] = {}
+        graph[from_node][to_node] = True
+
     cycle = [next(iter(graph))]
 
     while graph:
@@ -163,7 +192,7 @@ def eulerian_cycle(graph):
             while i < len(cycle):
                 # If a node has to_nodes restructure cycle to start at this node
                 if cycle[i] in graph:
-                    cycle = cycle[i:-1] + cycle[0:i+1]
+                    cycle = cycle[i:-1] + cycle[:i+1]
                     i = len(cycle)
                 i += 1
 
@@ -171,8 +200,17 @@ def eulerian_cycle(graph):
             if i == len(cycle):
                 raise ValueError('Graph is not Eulerian.')
 
+    # Handle realignment of nearly balanced Eulerian path
+    if nearly:
+        i = 0
+        while i < len(cycle):
+            if cycle[i:i+2] == final_edge:
+                cycle = cycle[i+1:-1] + cycle[:i+1]
+                i = len(cycle)
+            i += 1
+
     return '->'.join(cycle)
 
 
 lines = sys.stdin.read().splitlines()
-print(eulerian_cycle(lines_to_graph_dict(lines)))
+print(eulerian_path(lines_to_graph_dict(lines), nearly=True))
