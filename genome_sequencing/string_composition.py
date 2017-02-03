@@ -1,9 +1,52 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import re
 import sys
 
-from generic import *
+def get_all_binary_kmers(k, kmer=''):
+    """
+        Generate a dictionary of all kmers for k. This is for the
+        universal string problem so these are binary.
+        :param k: length of kmer
+        :param kmer: a dummy value that will be built into kmers
+        :return: {kmer: 0}
+        """
+    kmers = {}
+    # Base case by adding the kmer to resulting output
+    if len(kmer) == k:
+        return {kmer: 0}
+
+    # Recurse another layer (length) for each base in [0, 1]
+    else:
+        for base in ['0', '1']:
+            kmers.update(get_all_binary_kmers(k, '{}{}'.format(kmer, base)))
+        return kmers
+
+
+
+def lines_to_graph_dict(lines):
+    """
+    Take a graph composed of line delimited x -> y, z node to node(s)
+    and convert this to a dictionary representation of
+    {node: {to_node: True}}.
+    :param lines: list of string representations of the graph nodes
+    :return: graph dictionary
+    """
+    graph = {}
+    for line in lines:
+        # Split the line into the first node left of the -> and a list of to_nodes from the right
+        node, to_nodes = re.split('->', re.sub('\s', '', line))
+
+        # If the node has not been seen already add it to the graph with a value of an empty dict
+        if node not in graph:
+            graph[node] = {}
+
+        # Set each to_node for the node
+        for to_node in re.split(',', to_nodes):
+            graph[node][to_node] = True
+
+    return graph
 
 
 __author__ = 'Michael Lockwood'
@@ -113,10 +156,9 @@ def de_bruijn_graph_from_string(k, text):
 def de_bruijn_graph_by_composition(kmers):
     """
     Construct a de Bruijn graph by composition from individual k-mers.
-    :param kmers: space delimited and ordered kmers for a genome
+    :param kmers: list of k-mers for a genome
     :return: the de Bruijn graph for the kmers
     """
-    kmers = kmers.rstrip().split()
     graph = {}
     for kmer in kmers:
         if get_prefix(kmer) not in graph:
@@ -164,15 +206,21 @@ def eulerian_path(graph, nearly=False):
                     counts[to_node]['to'] = counts[to_node].get('to', 0) + 1
 
         # Find the missing edge, note it then add to graph
+        from_node, to_node = (None, None)
         for node in counts:
             if counts[node]['from'] < counts[node]['to']:
                 from_node = node
             elif counts[node]['from'] > counts[node]['to']:
                 to_node = node
-        final_edge = [from_node, to_node]
-        if from_node not in graph:
-            graph[from_node] = {}
-        graph[from_node][to_node] = True
+
+        # Test to be sure that the graph is nearly balanced
+        if not from_node and not to_node:
+            nearly = False
+        else:
+            final_edge = [from_node, to_node]
+            if from_node not in graph:
+                graph[from_node] = {}
+            graph[from_node][to_node] = True
 
     cycle = [next(iter(graph))]
 
@@ -212,5 +260,39 @@ def eulerian_path(graph, nearly=False):
     return '->'.join(cycle)
 
 
-lines = sys.stdin.read().splitlines()
-print(eulerian_path(lines_to_graph_dict(lines), nearly=True))
+def resolve_overlaps(graph_string):
+    """
+    Take overlapping k-mers in a graph_string and combine them
+    :param graph_string: result of eulerian_path
+    :return: string composition by removing overlap
+    """
+    kmers = re.split('->', graph_string)
+    composition = kmers[0]
+    for kmer in kmers[1:]:
+        composition += kmer[-1]
+    return composition
+
+
+def genome_reconstruction(kmers):
+    """
+    Also known as the string reconstruction problem, take k-mers and
+    reassemble the string they are supposed to represent.
+    :param kmers: list of k-mers
+    :return: genome reconstructed from the k-mers
+    """
+    de_bruijn = de_bruijn_graph_by_composition(kmers).splitlines()
+    graph_string = eulerian_path(lines_to_graph_dict(de_bruijn), nearly=True)
+    return resolve_overlaps(graph_string)
+
+
+def universal_circular_string(k):
+    """
+    Find a universal circular string for binary k-mers of length k.
+    :param k: length of k-mers
+    :return: universal string
+    """
+    return genome_reconstruction(list(get_all_binary_kmers(int(k)).keys()))[:-int(k)+1]
+
+
+lines = sys.stdin.read().rstrip()
+print(universal_circular_string(lines))

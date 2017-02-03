@@ -11,3 +11,4 @@ __email__ = 'lockwm@uw.edu'
 
 def pytest_addoption(parser):
     parser.addoption("--runslow", action="store_true", help="run slow tests")
+    parser.addoption("--random", action="store_true", help="run tests with random or inconsistent outputs")

@@ -11,6 +11,26 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
+def get_all_binary_kmers(k, kmer=''):
+    """
+        Generate a dictionary of all kmers for k. This is for the
+        universal string problem so these are binary.
+        :param k: length of kmer
+        :param kmer: a dummy value that will be built into kmers
+        :return: {kmer: 0}
+        """
+    kmers = {}
+    # Base case by adding the kmer to resulting output
+    if len(kmer) == k:
+        return {kmer: 0}
+
+    # Recurse another layer (length) for each base in [0, 1]
+    else:
+        for base in ['0', '1']:
+            kmers.update(get_all_binary_kmers(k, '{}{}'.format(kmer, base)))
+        return kmers
+
+
 def get_all_kmers(k, kmer=''):
     """
     Generate a dictionary of all kmers for k
