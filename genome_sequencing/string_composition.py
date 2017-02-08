@@ -294,5 +294,29 @@ def universal_circular_string(k):
     return genome_reconstruction(list(get_all_binary_kmers(int(k)).keys()))[:-int(k)+1]
 
 
+def strings_spelled_by_gapped_patterns(pairs, k, d):
+    """
+    Take read pairs for a genome of length k and read distance d and
+    test whether the genome string for them is viable.
+    :param pairs: read pairs
+    :param k: length of k-mers
+    :param d: read distance
+    :return: string spelled by read pairs or no finding result
+    """
+    # Build the prefix and suffix strings from the read pairs
+    prefix, suffix = re.split('\|', pairs[0])
+    for pair in pairs[1:]:
+        pre, suf = re.split('\|', pair)
+        prefix.append(pre[-1])
+        suffix.append(suf[-1])
+
+    # Compare each position
+    i = k + d + 1  # see the impact of the extra integer
+    while i < len(prefix):
+        if prefix[i] != suffix[i-k-d-1]: # again with the index positions
+            return "there is no string spelled by the gapped patterns"
+    return prefix + suffix[-k-d:]
+
+
 lines = sys.stdin.read().rstrip()
 print(universal_circular_string(lines))
