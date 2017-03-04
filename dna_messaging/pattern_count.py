@@ -3,7 +3,7 @@
 
 import math
 
-from dna_messaging.constants import CONVERT, PROFILE_INDEX
+from constants import CONVERT, PROFILE_INDEX
 from dna_messaging.reverse_complement import reverse_complement
 from generic import *
 

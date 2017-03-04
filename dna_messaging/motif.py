@@ -7,7 +7,7 @@ import sys
 
 from numpy.random import choice
 
-from dna_messaging.constants import BASES, PROFILE_INDEX
+from constants import BASES, PROFILE_INDEX
 from generic import get_all_mismatched_kmers, hamming_distance
 
 __author__ = 'Michael Lockwood'

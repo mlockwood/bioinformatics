@@ -3,7 +3,7 @@
 
 import re
 
-from dna_messaging.constants import BASES
+from constants import BASES
 
 
 __author__ = 'Michael Lockwood'

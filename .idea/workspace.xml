@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849964-3687-44c1-907b-2568064d7c39" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/genome_sequencing/antibiotics.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/genome_sequencing/test/test_antibiotics.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dna_messaging/constants.py" afterPath="$PROJECT_DIR$/constants.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/michael.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/michael.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/motif.py" afterPath="$PROJECT_DIR$/dna_messaging/motif.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/pattern_count.py" afterPath="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generic.py" afterPath="$PROJECT_DIR$/generic.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_sequencing/data/test" afterPath="$PROJECT_DIR$/genome_sequencing/data/test" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_sequencing/string_composition.py" afterPath="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" afterPath="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" />
     </list>
     <ignored path="bioinformatics.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,36 +31,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="string_composition.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/genome_sequencing/string_composition.py">
+      <file leaf-file-name="antibiotics.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/genome_sequencing/antibiotics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="526" column="8" lean-forward="false" selection-start-line="526" selection-start-column="8" selection-end-line="526" selection-end-column="8" />
+            <state relative-caret-position="300">
+              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
               <folding>
-                <element signature="e#48#59#0" expanded="true" />
-                <element signature="e#220#596#0" expanded="false" />
-                <element signature="e#649#971#0" expanded="false" />
-                <element signature="e#1000#1136#0" expanded="false" />
-                <element signature="e#1165#1300#0" expanded="false" />
-                <element signature="e#1337#1748#0" expanded="false" />
-                <element signature="e#1787#2125#0" expanded="false" />
-                <element signature="e#2174#2780#0" expanded="false" />
-                <element signature="e#2830#3249#0" expanded="false" />
-                <element signature="e#3290#3617#0" expanded="false" />
-                <element signature="e#3654#4766#0" expanded="false" />
-                <element signature="e#4822#7083#0" expanded="false" />
-                <element signature="e#7130#9294#0" expanded="false" />
-                <element signature="e#9337#9662#0" expanded="false" />
-                <element signature="e#9703#10111#0" expanded="false" />
-                <element signature="e#10152#10380#0" expanded="false" />
-                <element signature="e#10440#11212#0" expanded="false" />
-                <element signature="e#11253#12534#0" expanded="false" />
-                <element signature="e#12595#13336#0" expanded="false" />
-                <element signature="e#13391#14977#0" expanded="false" />
-                <element signature="e#15047#16775#0" expanded="false" />
-                <element signature="e#16832#17469#0" expanded="false" />
-                <element signature="e#17506#17988#0" expanded="false" />
+                <element signature="e#48#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_antibiotics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_antibiotics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,32 +56,25 @@
       <file leaf-file-name="generic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="116" selection-end-column="16" />
+            <state relative-caret-position="330">
+              <caret line="68" column="50" lean-forward="false" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
               <folding>
                 <element signature="e#48#57#0" expanded="true" />
+                <element signature="e#218#798#0" expanded="false" />
+                <element signature="e#836#1312#0" expanded="false" />
+                <element signature="e#1347#1660#0" expanded="false" />
+                <element signature="e#1718#2803#0" expanded="false" />
+                <element signature="e#2842#3638#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_string_composition.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py">
+      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/constants.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="129" column="91" lean-forward="true" selection-start-line="129" selection-start-column="91" selection-end-line="129" selection-end-column="91" />
-              <folding>
-                <element signature="e#48#61#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/genome_sequencing/data/test">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="390">
+              <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -155,8 +142,11 @@
         <option value="$PROJECT_DIR$/genome_sequencing/out/extra_dataset_1_out" />
         <option value="$PROJECT_DIR$/generic.py" />
         <option value="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" />
+        <option value="$PROJECT_DIR$/constants.py" />
         <option value="$PROJECT_DIR$/genome_sequencing/data/test" />
         <option value="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
+        <option value="$PROJECT_DIR$/genome_sequencing/test/test_antibiotics.py" />
+        <option value="$PROJECT_DIR$/genome_sequencing/antibiotics.py" />
       </list>
     </option>
   </component>
@@ -263,6 +253,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dna_messaging" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -272,8 +276,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/dna_messaging/test" />
       <recent name="$PROJECT_DIR$/test/dna_messaging" />
       <recent name="$PROJECT_DIR$/genome_sequencing/test" />
@@ -530,25 +534,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/data/dataset_197_3.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/out/1_2_3_out.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/genome_sequencing/out/1_3_3_out.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -725,13 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dna_messaging/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dna_messaging/code.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
@@ -820,28 +803,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="116" selection-end-column="16" />
-          <folding>
-            <element signature="e#48#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/genome_sequencing/out/2_6_2_out.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/data/test">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -854,10 +819,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="68" column="50" lean-forward="false" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+          <folding>
+            <element signature="e#48#57#0" expanded="true" />
+            <element signature="e#218#798#0" expanded="false" />
+            <element signature="e#836#1312#0" expanded="false" />
+            <element signature="e#1347#1660#0" expanded="false" />
+            <element signature="e#1718#2803#0" expanded="false" />
+            <element signature="e#2842#3638#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1196">
+          <caret line="110" column="20" lean-forward="true" selection-start-line="110" selection-start-column="20" selection-end-line="110" selection-end-column="20" />
+          <folding>
+            <element signature="e#48#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/genome_sequencing/string_composition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="526" column="8" lean-forward="false" selection-start-line="526" selection-start-column="8" selection-end-line="526" selection-end-column="8" />
+        <state relative-caret-position="199">
+          <caret line="91" column="41" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="41" />
           <folding>
             <element signature="e#48#59#0" expanded="true" />
             <element signature="e#220#596#0" expanded="false" />
@@ -866,32 +856,53 @@
             <element signature="e#1165#1300#0" expanded="false" />
             <element signature="e#1337#1748#0" expanded="false" />
             <element signature="e#1787#2125#0" expanded="false" />
-            <element signature="e#2174#2780#0" expanded="false" />
-            <element signature="e#2830#3249#0" expanded="false" />
-            <element signature="e#3290#3617#0" expanded="false" />
-            <element signature="e#3654#4766#0" expanded="false" />
-            <element signature="e#4822#7083#0" expanded="false" />
-            <element signature="e#7130#9294#0" expanded="false" />
-            <element signature="e#9337#9662#0" expanded="false" />
-            <element signature="e#9703#10111#0" expanded="false" />
-            <element signature="e#10152#10380#0" expanded="false" />
-            <element signature="e#10440#11212#0" expanded="false" />
-            <element signature="e#11253#12534#0" expanded="false" />
-            <element signature="e#12595#13336#0" expanded="false" />
-            <element signature="e#13391#14977#0" expanded="false" />
-            <element signature="e#15047#16775#0" expanded="false" />
-            <element signature="e#16832#17469#0" expanded="false" />
-            <element signature="e#17506#17988#0" expanded="false" />
+            <element signature="e#2174#2818#0" expanded="false" />
+            <element signature="e#2868#3287#0" expanded="false" />
+            <element signature="e#3817#4929#0" expanded="false" />
+            <element signature="e#4985#7246#0" expanded="false" />
+            <element signature="e#7293#9457#0" expanded="false" />
+            <element signature="e#9500#9825#0" expanded="false" />
+            <element signature="e#10569#11341#0" expanded="false" />
+            <element signature="e#11382#12663#0" expanded="false" />
+            <element signature="e#12724#13465#0" expanded="false" />
+            <element signature="e#13520#15106#0" expanded="false" />
+            <element signature="e#15176#16904#0" expanded="false" />
+            <element signature="e#16961#17598#0" expanded="false" />
+            <element signature="e#17635#18117#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py">
+    <entry file="file://$PROJECT_DIR$/genome_sequencing/data/test">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="129" column="91" lean-forward="true" selection-start-line="129" selection-start-column="91" selection-end-line="129" selection-end-column="91" />
+        <state relative-caret-position="0">
+          <caret line="0" column="51" lean-forward="true" selection-start-line="0" selection-start-column="51" selection-end-line="0" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_antibiotics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_sequencing/antibiotics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#48#58#0" expanded="true" />
           </folding>
         </state>
       </provider>

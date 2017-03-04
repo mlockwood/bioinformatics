@@ -98,14 +98,12 @@ def de_bruijn_graph_from_string(k, text):
     """
     graph = {}
     node_size = int(k) - 1
-    prev = text[0:node_size]
     i = 1
     while i <= (len(text) - node_size):
-        if prev not in graph:
-            graph[prev] = {}
-        # Append to node onto from list based on next k-mer sequence
-        graph[prev][text[i:i+node_size]] = graph[prev].get([text[i:i+node_size]], 0) + 1
-        prev = text[i:i+node_size]
+        if text[i-1:i-1+node_size] not in graph:
+            graph[text[i-1:i-1+node_size]] = {}
+        graph[text[i-1:i-1+node_size]][text[i:i+node_size]] = graph[text[i-1:i-1+node_size]].get(text[i:i+node_size],
+                                                                                                 0) + 1
         i += 1
 
     return print_de_bruijn_graph(graph)
@@ -134,7 +132,11 @@ def print_de_bruijn_graph(graph):
     """
     result = ''
     for i in sorted(list(graph.keys())):
-        result += '{} -> {}\n'.format(i, ','.join(sorted(list(graph[i].keys()))))
+        to_nodes = []
+        for key in sorted(graph[i].keys()):
+            for x in range(graph[i][key]):
+                to_nodes.append(key)
+        result += '{} -> {}\n'.format(i, ','.join(to_nodes))
     return result
 
 
@@ -322,8 +324,8 @@ def genome_reconstruction(kmers):
     :param kmers: list of k-mers
     :return: genome reconstructed from the k-mers
     """
-    de_bruijn = de_bruijn_graph_by_composition(kmers).splitlines()
-    graph_string = eulerian_path(lines_to_graph_dict(de_bruijn), nearly=True)
+    de_bruijn = de_bruijn_graph_by_composition(kmers)
+    graph_string = eulerian_path(de_bruijn, nearly=True)
     return resolve_overlaps(graph_string)
 
 
@@ -561,7 +563,3 @@ def maximal_non_branching_paths(graph):
                 for x in range(graph[node][to_node]):
                     paths.append((node, to_node))
     return sorted(paths)
-
-
-lines = sys.stdin.read().rstrip().splitlines()
-print(' '.join(contig_generation(lines)))
