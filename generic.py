@@ -97,7 +97,7 @@ def lines_to_graph_dict(lines):
     """
     Take a graph composed of line delimited x -> y, z node to node(s)
     and convert this to a dictionary representation of
-    {node: {to_node: True}}.
+    {node: {to_node: count}}.
     :param lines: list of string representations of the graph nodes
     :return: graph dictionary
     """
@@ -112,6 +112,6 @@ def lines_to_graph_dict(lines):
 
         # Set each to_node for the node
         for to_node in re.split(',', to_nodes):
-            graph[node][to_node] = True
+            graph[node][to_node] = graph[node].get(to_node, 0) + 1
 
     return graph

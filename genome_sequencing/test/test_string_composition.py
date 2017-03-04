@@ -46,8 +46,9 @@ def test_de_bruijn_graph_from_string():
 
 
 def test_de_bruijn_graph_by_composition():
-    assert de_bruijn_graph_by_composition(['GAGG', 'CAGG', 'GGGG', 'GGGA', 'CAGG', 'AGGG', 'GGAG']
-                                          ) == 'AGG -> GGG\nCAG -> AGG,AGG\nGAG -> AGG\nGGA -> GAG\nGGG -> GGA,GGG\n'
+    assert print_de_bruijn_graph(
+        de_bruijn_graph_by_composition(['GAGG', 'CAGG', 'GGGG', 'GGGA', 'CAGG', 'AGGG', 'GGAG'])
+    ) == 'AGG -> GGG\nCAG -> AGG,AGG\nGAG -> AGG\nGGA -> GAG\nGGG -> GGA,GGG\n'
 
 
 class TestEulerianPath:
@@ -93,3 +94,37 @@ def test_genome_reconstruction():
 
 def test_universal_circular_string():
     assert universal_circular_string(2) == '0011' or '0110' or '1001' or '1100'
+
+
+def test_string_spelled_by_gapped_patterns():
+    assert strings_spelled_by_gapped_patterns([
+        'GACC|GCGC',
+        'ACCG|CGCC',
+        'CCGA|GCCG',
+        'CGAG|CCGG',
+        'GAGC|CGGA'
+    ], 4, 2) == 'GACCGAGCGCCGGA'
+
+
+def test_read_pairs_path():
+    assert read_pairs_path([
+        'GAGA|TTGA',
+        'TCGT|GATG',
+        'CGTG|ATGT',
+        'TGGT|TGAG',
+        'GTGA|TGTT',
+        'GTGG|GTGA',
+        'TGAG|GTTG',
+        'GGTC|GAGA',
+        'GTCG|AGAT'
+    ], 4, 2) == 'GTGGTCGTGAGATGTTGA'
+
+
+def test_maximal_non_branching_paths():
+    assert maximal_non_branching_paths(lines_to_graph_dict([
+        '1 -> 2',
+        '2 -> 3',
+        '3 -> 4, 5',
+        '6 -> 7',
+        '7 -> 6'
+    ])) == [(1, 2, 3), (3, 4), (3, 5), (6, 7, 6)] or [(1, 2, 3), (3, 4), (3, 5), (7, 6, 7)]
