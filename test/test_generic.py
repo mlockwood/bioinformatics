@@ -8,6 +8,10 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
+def test_reverse_complement():
+    assert reverse_complement('AAAACCCGGT') == 'ACCGGGTTTT'
+
+
 def test_get_all_kmers():
     assert set(get_all_kmers(2)) == {'AA', 'AC', 'AG', 'AT', 'CA', 'CC', 'CG', 'CT', 'GA', 'GC', 'GG', 'GT', 'TA', 'TC',
                                      'TG', 'TT'}

@@ -11,6 +11,16 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
+def reverse_complement(string):
+    lookup = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
+    text = ''
+    i = -1
+    while i >= -len(string):
+        text += lookup[string[i]]
+        i -= 1
+    return text
+
+
 def get_all_binary_kmers(k, kmer=''):
     """
         Generate a dictionary of all kmers for k. This is for the

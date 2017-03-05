@@ -4,7 +4,6 @@
 import math
 
 from constants import CONVERT, PROFILE_INDEX
-from dna_messaging.reverse_complement import reverse_complement
 from generic import *
 
 
