@@ -111,13 +111,11 @@ def find_peptide_spectrum(peptide, cyclic=False):
     prefix_mass = {0: 0}
     i = 0
     while i < len(peptide):
-        prefix_mass[i+1] = PEPTIDE_MASS[peptide[i]] + prefix_mass[i]
+        prefix_mass[i+1] = PEPTIDE_TO_MASS[peptide[i]] + prefix_mass[i]
         i += 1
 
     # Save the full peptide mass
     peptide_mass = prefix_mass[len(peptide)]
-
-    print(prefix_mass, peptide_mass)
 
     # Build the spectrum from the prefix masses
     spectrum = [0]
@@ -137,5 +135,91 @@ def find_peptide_spectrum(peptide, cyclic=False):
     return sorted(spectrum)
 
 
+def cyclopeptide_sequencing(spectrum):
+    """
+    Find all peptides that fit the theoretical mass spectrum provided.
+    :param spectrum: theoretical mass spectrum
+    :return: all matching peptides
+    """
+    # Handle string input
+    if isinstance(spectrum, str):
+        spectrum = [int(s) for s in spectrum.split()]
+
+    # Set up data structures and process
+    spectrum_lookup = set(spectrum)
+    peptides = [[]]
+    out = []
+    while peptides:
+        # Expand peptides
+        expanded = []
+        for peptide in peptides:
+            for mass in MASS_TO_PEPTIDE:
+                if mass in spectrum_lookup:
+                    expanded.append(peptide + [mass])
+
+        # Check peptides
+        peptides = []
+        for peptide in expanded:
+            # Check if the peptide's mass is equal to the spectrum's
+            if sum(peptide) == spectrum[-1]:
+                # Verify that the entire peptide string matches
+                if find_peptide_spectrum(''.join(MASS_TO_PEPTIDE[i][0] for i in peptide), cyclic=True) == spectrum:
+                    out.append(peptide)
+
+            # Otherwise test if the peptide's spectrum fits the provided spectrum, if it does allow it to be expanded
+            else:
+                match = True
+                for mass in find_peptide_spectrum(''.join(MASS_TO_PEPTIDE[i][0] for i in peptide)):
+                    if mass not in spectrum_lookup:
+                        match = False
+                if match:
+                    peptides.append(peptide)
+
+    return sorted(out)
+
+
+def print_cyclopeptide_sequences(peptides):
+    """
+    Take lists of peptide masses and print them as space delimited
+    entries of hyphen delimited masses such as mass-mass mass-mass.
+    :param peptides: list of peptide mass lists
+    :return: string of delimited entries
+    """
+    return ' '.join(['-'.join(str(i) for i in peptide) for peptide in peptides])
+
+
+def cyclopeptide_scoring(peptide, spectrum):
+    """
+    Score a cyclic peptide against a spectrum.
+    :param peptide: amino acid peptide chain
+    :param spectrum: theoretical mass spectrum
+    :return: score
+    """
+    # Handle string input
+    if isinstance(spectrum, str):
+        spectrum = [int(s) for s in spectrum.split()]
+
+    # Convert spectrum from list to dict
+    spectrum_lookup = {}
+    for mass in spectrum:
+        spectrum_lookup[mass] = spectrum_lookup.get(mass, 0) + 1
+
+    # Convert peptide to spectrum and then convert to dict
+    peptide_lookup = {}
+    for mass in find_peptide_spectrum(peptide, cyclic=True):
+        peptide_lookup[mass] = peptide_lookup.get(mass, 0) + 1
+
+    # Score peptide
+    score = 0
+    for mass in peptide_lookup:
+        if mass in spectrum_lookup:
+            # If peptide count is >= spectrum add spectrum count
+            if peptide_lookup[mass] >= spectrum_lookup[mass]:
+                score += spectrum_lookup[mass]
+            # Otherwise add peptide count
+            else:
+                score += peptide_lookup[mass]
+
+    return score
+
 # lines = sys.stdin.read().rstrip().splitlines()
-print(count_cyclic_subpeptides(21184))

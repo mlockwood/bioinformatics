@@ -41,3 +41,13 @@ class TestFindPeptideSpectrum():
     def test_cyclic_spectrum(self):
         assert find_peptide_spectrum('NQEL', cyclic=True) == [0, 113, 114, 128, 129, 227, 242, 242, 257, 355, 356, 370,
                                                               371, 484]
+
+
+def test_cyclopeptide_sequencing():
+    assert print_cyclopeptide_sequences(cyclopeptide_sequencing([0, 113, 128, 186, 241, 299, 314, 427])) == (
+        '113-128-186 113-186-128 128-113-186 128-186-113 186-113-128 186-128-113'
+    )
+
+
+def test_cyclopeptide_scoring():
+    assert cyclopeptide_scoring('NQEL', [0, 99, 113, 114, 128, 227, 257, 299, 355, 356, 370, 371, 484]) == 11

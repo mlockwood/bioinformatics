@@ -3,7 +3,7 @@
 
 import math
 
-from constants import CONVERT, PROFILE_INDEX
+from constants import INVERSE_PROFILE, PROFILE_INDEX
 from generic import *
 
 
@@ -206,7 +206,7 @@ def pattern_to_number(pattern):
     """
     if not pattern:
         return 0
-    return pattern_to_number(pattern[:-1]) * 4 + CONVERT[pattern[-1]]
+    return pattern_to_number(pattern[:-1]) * 4 + INVERSE_PROFILE[pattern[-1]]
 
 
 def number_to_pattern(number, k):

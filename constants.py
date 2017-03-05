@@ -7,7 +7,6 @@ __email__ = 'lockwm@uw.edu'
 
 
 BASES = {'A', 'C', 'G', 'T'}
-CONVERT = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
 GENETIC_CODE = {
     'AAA': 'K', 'AAC': 'N', 'AAG': 'K', 'AAU': 'N',
     'ACA': 'T', 'ACC': 'T', 'ACG': 'T', 'ACU': 'T',
@@ -26,7 +25,8 @@ GENETIC_CODE = {
     'UGA': '*', 'UGC': 'C', 'UGG': 'W', 'UGU': 'C',
     'UUA': 'L', 'UUC': 'F', 'UUG': 'L', 'UUU': 'F'
 }
-PEPTIDE_MASS = {
+INVERSE_PROFILE = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+PEPTIDE_TO_MASS = {
     'G': 57,
     'A': 71,
     'S': 87,
@@ -49,3 +49,23 @@ PEPTIDE_MASS = {
     'W': 186
 }
 PROFILE_INDEX = {0: 'A', 1: 'C', 2: 'G', 3: 'T'}
+MASS_TO_PEPTIDE = {
+    57: ('G',),
+    71: ('A',),
+    87: ('S',),
+    97: ('P',),
+    99: ('V',),
+    101: ('T',),
+    103: ('C',),
+    113: ('I', 'L'),
+    114: ('N',),
+    115: ('D',),
+    128: ('Q', 'K'),
+    129: ('E',),
+    131: ('M',),
+    137: ('H',),
+    147: ('F',),
+    156: ('R',),
+    163: ('Y',),
+    186: ('W',)
+}
