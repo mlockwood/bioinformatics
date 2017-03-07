@@ -32,3 +32,6 @@ def test_lines_to_graph_dict():
         '1': {'0': True},
         '2': {'0': True}
     }
+
+def test_select_scores_with_ties():
+    assert select_scores_with_ties([(8, 'A'), (7, 'B'), (7, 'C'), (6, 'D')], 2) == 3

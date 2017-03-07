@@ -49,5 +49,22 @@ def test_cyclopeptide_sequencing():
     )
 
 
+def test_leaderboard_cyclopeptide_sequencing():
+    assert sorted(leaderboard_cyclopeptide_sequencing([0, 71, 113, 129, 147, 200, 218, 260, 313, 331, 347, 389, 460],
+                                                      10)) == [
+        (71, 129, 113, 147), (71, 147, 113, 129), (113, 129, 71, 147), (113, 147, 71, 129),
+        (129, 71, 147, 113), (129, 113, 147, 71), (147, 71, 129, 113), (147, 113, 129, 71)
+    ]
+
+
+def test_convolutional_cyclopeptide_sequencing():
+    assert (99, 71, 137, 57, 72, 57) in convolutional_cyclopeptide_sequencing(
+        [57, 57, 71, 99, 129, 137, 170, 186, 194, 208, 228, 265, 285, 299, 307, 323, 356, 364, 394, 422, 493], 20, 60)
+
+
 def test_cyclopeptide_scoring():
     assert cyclopeptide_scoring('NQEL', [0, 99, 113, 114, 128, 227, 257, 299, 355, 356, 370, 371, 484]) == 11
+
+
+def test_find_spectral_convolution():
+    assert print_spectral_convolution(find_spectral_convolution([0, 137, 186, 323])) == '49 137 137 186 186 323'

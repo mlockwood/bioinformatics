@@ -125,3 +125,20 @@ def lines_to_graph_dict(lines):
             graph[node][to_node] = graph[node].get(to_node, 0) + 1
 
     return graph
+
+
+def select_scores_with_ties(scores, n):
+    """
+    Return the N best elements in a score after factoring in tie
+    breaking. Scores should be sorted before function use.
+    :param scores: [(score, element), (score, element)]
+    :return: new N index
+    """
+    # Change N in the event of a tie
+    i = int(n)
+    while i < len(scores):
+        if scores[i][0] == scores[i - 1][0]:
+            i += 1
+        else:
+            break
+    return i
