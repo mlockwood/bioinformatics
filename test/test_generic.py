@@ -28,10 +28,17 @@ def test_get_all_mismatched_kmers():
 
 def test_lines_to_graph_dict():
     assert lines_to_graph_dict(['0 -> 1,2', '1 -> 0', '2 -> 0']) == {
-        '0': {'1': True, '2': True},
-        '1': {'0': True},
-        '2': {'0': True}
+        '0': {'1': 1, '2': 1},
+        '1': {'0': 1},
+        '2': {'0': 1}
     }
+    assert lines_to_graph_dict(['0->1:7', '0->2:4', '2->3:2', '1->4:1', '3->4:3'], weighted=True) == {
+        '0': {'1': 7, '2': 4},
+        '1': {'4': 1},
+        '2': {'3': 2},
+        '3': {'4': 3}
+    }
+
 
 def test_select_scores_with_ties():
     assert select_scores_with_ties([(8, 'A'), (7, 'B'), (7, 'C'), (6, 'D')], 2) == 3

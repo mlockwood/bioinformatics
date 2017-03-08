@@ -103,12 +103,13 @@ def get_all_mismatched_kmers(pattern, d, kmer=''):
         return kmers
 
 
-def lines_to_graph_dict(lines):
+def lines_to_graph_dict(lines, weighted=False):
     """
     Take a graph composed of line delimited x -> y, z node to node(s)
     and convert this to a dictionary representation of
     {node: {to_node: count}}.
     :param lines: list of string representations of the graph nodes
+    :param weighted: toggle between weighted and not weighted graphs
     :return: graph dictionary
     """
     graph = {}
@@ -120,9 +121,15 @@ def lines_to_graph_dict(lines):
         if node not in graph:
             graph[node] = {}
 
-        # Set each to_node for the node
-        for to_node in re.split(',', to_nodes):
-            graph[node][to_node] = graph[node].get(to_node, 0) + 1
+        # If weighted set value to weights
+        if weighted:
+            to_node, weight = re.split(':', to_nodes)
+            graph[node][to_node] = int(weight)
+
+        # Otherwise allow multiple to_nodes comma delimited per line
+        else:
+            for to_node in re.split(',', to_nodes):
+                graph[node][to_node] = graph[node].get(to_node, 0) + 1
 
     return graph
 

@@ -1,10 +1,13 @@
-__author__ = 'Michael Lockwood'
-__github__ = 'mlockwood'
-__email__ = 'lockwm@uw.edu'
-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import re
 import sys
+
+
+__author__ = 'Michael Lockwood'
+__github__ = 'mlockwood'
+__email__ = 'lockwm@uw.edu'
 
 
 def manhattan_tourist(n, m, down, right):

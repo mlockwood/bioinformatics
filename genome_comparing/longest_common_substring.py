@@ -1,9 +1,14 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+
+from generic import *
+
+
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
-
-
-import sys
 
 
 def LCS_back_track(v, w):
@@ -66,5 +71,51 @@ def solve_LCS(v, w):
     return output_LCS(backtrack, v, len(v), len(w))
 
 
-#sys.setrecursionlimit(10000)
-#print(solve_LCS(*sys.stdin.read().splitlines()))
+class DAG(object):
+
+    def __init__(self, graph, root, tail):
+        self.graph = graph
+        self.root = root
+        self.tail = tail
+        self.longest_length = 0
+        self.longest_path = []
+
+    @staticmethod
+    def build_graph(lines):
+        return lines_to_graph_dict(lines, weighted=True)
+
+    def longest_path_in_DAG(self):
+        """
+        Take a directed acyclic graph (DAG) and find the longest path by
+        weight.
+        :return: length and path
+        """
+        if not self.longest_path:
+            self.explore_DAG([self.root])
+        return self.longest_length, self.longest_path
+
+    def explore_DAG(self, path, weight=0):
+        """
+        Explore a DAG recursively seeking for the best solution.
+        :param path: previously explored path
+        :param weight: current weight given path
+        :return: save results to self.longest_[length|path]
+        """
+
+        # Handle base case where the tail has been reached
+        if path[-1] == self.tail:
+            if weight > self.longest_length:
+                self.longest_length = weight
+                self.longest_path = path
+
+        # Otherwise explore other nodes
+        if path[-1] in self.graph:
+            current_tail = path[-1]
+            for node in self.graph[path[-1]]:
+                self.explore_DAG(path+[node], weight+self.graph[current_tail][node])
+
+
+lines = sys.stdin.read().splitlines()
+weight, path = DAG(DAG.build_graph(lines[2:]), lines[0], lines[1]).longest_path_in_DAG()
+print(weight)
+print('->'.join(path))

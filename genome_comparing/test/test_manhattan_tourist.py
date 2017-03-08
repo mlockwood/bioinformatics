@@ -3,11 +3,11 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
-from comparing_genes.manhattan_tourist import *
+from genome_comparing.manhattan_tourist import *
 
 
 def test_manhattan_tourist():
-    reader = open('comparing_genes/test/manhattan_tourist_test_data.txt', 'r')
+    reader = open('genome_comparing/test/manhattan_tourist_test_data.txt', 'r')
     lines = []
     for row in reader:
         lines.append(row.rstrip())

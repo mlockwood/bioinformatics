@@ -1,4 +1,4 @@
-from comparing_genes.change_coins import *
+from genome_comparing.change_coins import *
 
 
 __author__ = 'Michael Lockwood'
