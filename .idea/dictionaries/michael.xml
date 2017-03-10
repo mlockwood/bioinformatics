@@ -2,11 +2,13 @@
   <dictionary name="michael">
     <words>
       <w>aminos</w>
+      <w>blosum</w>
       <w>bruijn</w>
       <w>contig</w>
       <w>convolutional</w>
       <w>cyclopeptide</w>
       <w>eulerian</w>
+      <w>indels</w>
       <w>kmer</w>
       <w>leaderboard</w>
       <w>probs</w>

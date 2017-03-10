@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from genome_comparing.manhattan_tourist import *
+
+
 __author__ = 'Michael Lockwood'
 __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
-
-
-from genome_comparing.manhattan_tourist import *
 
 
 def test_manhattan_tourist():

@@ -33,7 +33,7 @@ def test_count_cyclic_subpeptides():
     assert count_cyclic_subpeptides(31315) == 980597910
 
 
-class TestFindPeptideSpectrum():
+class TestFindPeptideSpectrum:
 
     def test_linear_spectrum(self):
         assert find_peptide_spectrum('NQEL') == [0, 113, 114, 128, 129, 242, 242, 257, 370, 371, 484]
