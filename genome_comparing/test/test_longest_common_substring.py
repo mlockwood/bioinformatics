@@ -29,8 +29,22 @@ class TestSolveLCS:
         assert solve_LCS('GTAGGCTTAAGGTTA', 'TAGATA', method='fitting', sigma=1, mu=1
             ) == (2, ('TAGGCTTA', 'TAGA--TA')) or (2, ('TAGGCTTA', 'TAG--ATA')) or (2, ('TAGGCTTA', 'TA-G-ATA'))
 
+    def test_overlap_alignment(self):
+        assert solve_LCS('PAWHEAE', 'HEAGAWGHEE', method='overlap', sigma=2, mu=2
+                         ) == (1, ('HEAE', 'HEAG')) or (1, ('HEAE', 'HEA-'))
+
+    def test_affine_gaps_alignment(self):
+        assert solve_LCS('PRTEINS', 'PRTWPSEIN', method='affine-gaps', sigma=11, mu=BLOSUM62, epsilon=1
+                         ) == (8, ('PRT---EINS', 'PRTWPSEIN-'))
+
     def test_edit_distance(self):
         assert solve_LCS('PLEASANTLY', 'MEANLY', method='edit_distance') == 5
+
+
+def test_score_alignments():
+    assert score_alignments('TCGAC--ATT', 'CC---GAA-T', 1, 2, 1) == -10
+    assert score_alignments('ACAGTAGACAC', 'ATAC-AGATAC', 1, 1, 3) == -3
+    assert score_alignments('CTAGTACTACTTGAC', 'CTA-TAGT-CTTAAC', 1, 2, 0) == 7
 
 
 def test_DAG():

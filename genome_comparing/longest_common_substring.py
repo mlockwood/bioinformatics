@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import copy
 import sys
 
 from constants import *
@@ -12,64 +13,65 @@ __github__ = 'mlockwood'
 __email__ = 'lockwm@uw.edu'
 
 
-def solve_LCS(v, w, method='default', sigma=0, mu=0):
+def solve_LCS(v, w, method='default', sigma=0, mu=0, epsilon=0):
     """
     Run and output results for the LCS problem.
     :param v: first string
     :param w: second string
     :param method: the method for scoring
-    :param sigma: penalty for indels
+    :param sigma: penalty for indels (particularly those starting gaps)
     :param mu: match and mismatch scoring
+    :param epsilon: penalty for indels after a gap has been started
     :return: a LCS backtrack tracer
     """
-    # For fitting run all substrings of `v` against `w`
-    if re.search('fitting', method):
-        best_score = (0, None, '')  # (score, backtrack, v_substring)
-        i = 0
-        while i < len(v):
-            score, backtrack, pointer = run_LCS(v[i:], w, method, sigma, mu)
-            if score > best_score[0]:
-                best_score = (score, backtrack, v[i:i+pointer[0]+1])
-            i += 1
-
-    # Otherwise perform a standard run
-    else:
-        score, backtrack, pointer = run_LCS(v, w, method, sigma, mu)
+    path, backtrack, score, i, j = run_LCS(v, w, method, sigma, mu, epsilon)
 
     # Prepare outputs
     if method == 'global':
-        return score, output_LCS_alignment(backtrack, v, w, len(v), len(w))
+        return path[len(v)][len(w)], output_LCS_alignment(backtrack, v, w, len(v), len(w))
 
     elif method == 'local':
-        return score, output_LCS_alignment(backtrack, v, w, pointer[0], pointer[1])
+        return path[i][j], output_LCS_alignment(backtrack, v, w, i, j)
 
     elif re.search('fitting', method):
-        return best_score[0], output_LCS_alignment(best_score[1], best_score[2], w, len(best_score[2]), len(w))
+        return path[i][j], output_LCS_alignment(backtrack, v[:i], w, i, j, method)
+
+    elif re.search('overlap', method):
+        return path[i][j], output_LCS_alignment(backtrack, v, w[:j], i, j, method)
+
+    elif method == 'affine-gaps':
+        return path[len(v)][len(w)], output_LCS_alignment(backtrack, v, w, len(v), len(w))
 
     elif method == 'edit_distance':
-        return -score
+        return -path[len(v)][len(w)]
 
     else:
         return output_LCS(backtrack, v, len(v), len(w))
 
 
-def run_LCS(v, w, method, sigma, mu):
+def run_LCS(v, w, method, sigma, mu, epsilon):
     """
     Create a LCS backtrack tracer for strings v and w.
     :param v: first string
     :param w: second string
     :param method: the method for scoring
-    :param sigma: penalty for indels
+    :param sigma: penalty for indels (particularly those starting gaps)
     :param mu: match and mismatch scoring
+    :param epsilon: penalty for indels after a gap has been started
     :return: a LCS backtrack tracer
     """
     path = {0: {0: 0}}
-    multiplier = -sigma if method != 'edit_distance' else -1
+    if method == 'edit_distance':
+        multiplier = -1
+    elif re.search('fitting', method):
+        multiplier = 0
+    else:
+        multiplier = -sigma
 
     # Initialize the first column
     i = 1
     while i <= len(v):
-        path[i] = {0: i * multiplier}
+        path[i] = {0: i * multiplier if not re.search('overlap', method) else 0}
         i += 1
 
     # Initialize the first row
@@ -78,20 +80,28 @@ def run_LCS(v, w, method, sigma, mu):
         path[0][j] = j * multiplier
         j += 1
 
+    lower, upper = copy.deepcopy(path), copy.deepcopy(path)
+
     # Process each subsequent row
     backtrack = {}
-    best_score = (-sys.maxsize, None)
+    best_score = (-sys.maxsize, None, None)
     i = 1
     while i <= len(v):
         backtrack[i] = {}
         j = 1
         while j <= len(w):
+            # Handle mu value
+            if isinstance(mu, dict):
+                mu_value = mu[v[i-1]][w[j-1]]
+            else:
+                mu_value = -mu if v[i-1] != w[j-1] else 1
+
             # Build the options list depending on the method selected
             if method == 'global' or method == 'fitting-global':
                 options = [
                     (path[i-1][j] - sigma, 'D'),
                     (path[i][j-1] - sigma, 'I'),
-                    (path[i-1][j-1] + mu[v[i-1]][w[j-1]], 'M')
+                    (path[i-1][j-1] + mu_value, 'M')
                 ]
 
             elif method == 'local':
@@ -99,7 +109,27 @@ def run_LCS(v, w, method, sigma, mu):
                     (0, 'F'),
                     (path[i-1][j] - sigma, 'D'),
                     (path[i][j-1] - sigma, 'I'),
-                    (path[i-1][j-1] + mu[v[i-1]][w[j-1]], 'M')
+                    (path[i-1][j-1] + mu_value, 'M')
+                ]
+
+            elif method == 'affine-gaps':
+                # Set lower scores
+                lower[i][j] = max([
+                    lower[i-1][j] - epsilon,
+                    path[i-1][j] - sigma
+                ])
+
+                # Set upper scores
+                upper[i][j] = max([
+                    upper[i][j-1] - epsilon,
+                    path[i][j-1] - sigma
+                ])
+
+                # Set options for path ("middle")
+                options = [
+                    (lower[i][j], 'D'),
+                    (upper[i][j], 'I'),
+                    (path[i-1][j-1] + mu_value, 'M')
                 ]
 
             elif method == 'edit_distance':
@@ -113,19 +143,22 @@ def run_LCS(v, w, method, sigma, mu):
                 options = [
                     (path[i-1][j] - sigma, 'D'),
                     (path[i][j-1] - sigma, 'I'),
-                    (path[i-1][j-1] + 1, 'M') if v[i-1] == w[j-1] else (path[i-1][j-1] - mu, 'U')
+                    (path[i-1][j-1] + mu_value, 'M' if v[i-1] == w[j-1] else 'U')
                 ]
 
             # Set path and backtrack based on which option has the maximum score
             path[i][j], backtrack[i][j] = max(options)
 
             # Handle best scores
-            if path[i][j] > best_score[0] and (method == 'local' or method == 'fitting'):
-                best_score = (path[i][j], (i, j))
+            if path[i][j] > best_score[0]:
+                if (method == 'local' or
+                        (j == len(w) and re.search('fitting', method)) or
+                        (i == len(v) and re.search('overlap', method))):
+                    best_score = (path[i][j], i, j)
             j += 1
         i += 1
 
-    return best_score[0] if best_score[0] != -sys.maxsize else path[i-1][j-1], backtrack, best_score[-1]
+    return path, backtrack, best_score[0], best_score[1], best_score[2]
 
 
 def output_LCS(backtrack, v, i, j):
@@ -149,7 +182,7 @@ def output_LCS(backtrack, v, i, j):
         return output_LCS(backtrack, v, i-1, j-1) + v[i-1]
 
 
-def output_LCS_alignment(backtrack, v, w, i, j):
+def output_LCS_alignment(backtrack, v, w, i, j, method=''):
     """
     Using a LCS backtrack and both input strings construct an alignment
     between the two string.
@@ -158,11 +191,12 @@ def output_LCS_alignment(backtrack, v, w, i, j):
     :param w: second string
     :param i: length of v
     :param j: length of w, the other string
+    :param method: method check for allowing extra indels at BOS/EOS
     :return: LCS
     """
     # Base case, consider if there are any remaining elements from v or w
     if i == 0 or j == 0:
-        if i > 0:
+        if i > 0 and not re.search('fitting|overlap', method):
             return v[:i], '-' * i
         elif j > 0:
             return '-' * j, w[:j]
@@ -175,18 +209,46 @@ def output_LCS_alignment(backtrack, v, w, i, j):
 
     # Deletion
     if backtrack[i][j] == 'D':
-        new_v, new_w = output_LCS_alignment(backtrack, v, w, i-1, j)
+        new_v, new_w = output_LCS_alignment(backtrack, v, w, i-1, j, method)
         return new_v + v[i-1], new_w + '-'
 
     # Insertion
     elif backtrack[i][j] == 'I':
-        new_v, new_w = output_LCS_alignment(backtrack, v, w, i, j-1)
+        new_v, new_w = output_LCS_alignment(backtrack, v, w, i, j-1, method)
         return new_v + '-', new_w + w[j-1]
 
     # Match or mismatch
     elif backtrack[i][j] == 'M' or backtrack[i][j] == 'U':
-        new_v, new_w = output_LCS_alignment(backtrack, v, w, i-1, j-1)
+        new_v, new_w = output_LCS_alignment(backtrack, v, w, i-1, j-1, method)
         return new_v + v[i-1], new_w + w[j-1]
+
+
+def score_alignments(v, w, match=1, sigma=1, mu=1):
+    """
+    Run and output results for the LCS problem.
+    :param v: first string
+    :param w: second string
+    :param match: the points awarded for a match
+    :param sigma: penalty for indels
+    :param mu: the points lost for a mismath
+    :return: score
+    """
+    score = 0
+    i = 0
+    while i < len(v):
+        # If a match, add match to score
+        if v[i] == w[i]:
+            score += match
+
+        # If an indel has been found (for insert or delete) subtract sigma from score
+        elif v[i] == '-' or w[i] == '-':
+            score -= sigma
+
+        # If a mismatch, subtract mu from score
+        else:
+            score -= mu
+        i += 1
+    return score
 
 
 class DAG(object):
@@ -234,7 +296,4 @@ class DAG(object):
 
 
 lines = sys.stdin.read().splitlines()
-score, out = solve_LCS(*lines, method='fitting', sigma=1, mu=1)
-print(score)
-print(out[0])
-print(out[1])
+print(solve_LCS(*lines, method='affine-gaps', sigma=11, mu=BLOSUM62, epsilon=1))
