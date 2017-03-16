@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import copy
+from math import floor
+from operator import sub
 import sys
 
 from constants import *
@@ -251,6 +253,146 @@ def score_alignments(v, w, match=1, sigma=1, mu=1):
     return score
 
 
+class LinearAlignment(object):
+
+    def __init__(self, v, w, sigma=0, mu=0):
+        self.v = v
+        self.v_reverse = v[::-1]
+        self.w = w
+        self.w_reverse = w[::-1]
+        self.sigma = sigma
+        self.mu = mu
+        self.path = []
+        self.alignment = None
+
+    def divide_and_conquer(self):
+        self.divide_matrix(0, 0, len(self.v), len(self.w))
+
+    def divide_matrix(self, i, j, m, n):
+        """
+        Divide the LCS matrix of indices of v between i and m and of
+        indices of w between j and n.
+        :param i: initial index for v
+        :param j: initial index for w
+        :param m: final index for v
+        :param n: final index for w
+        :return:
+        """
+        middle = j + floor((n - j) / 2)
+        scores = self.score_division(i, j, m, middle)
+        sink_scores = self.score_division(i, j, m, n-middle, reverse=True)
+        print(scores)
+        print(sink_scores)
+        for score in sink_scores:
+            scores[score] = scores.get(score, 0) + sink_scores[score]
+
+    def score_division(self, i, j, m, n, reverse=False):
+        """
+        Score the range of LCS matrix for indices of v between i and m
+        and for indices of w between j and n.
+        :param i: initial index for v
+        :param j: initial index for w
+        :param m: final index for v
+        :param n: final index for w
+        :param reverse: toggle for source to sink and sink to source
+        :return: set of scores
+        """
+        # Set base variables
+        initial_j = j + 1
+        prev = {}
+        for x in range(i, m+1):
+            prev[(x, j)] = (x - i) * -self.sigma
+        for y in range(j+1, n+1):
+            prev[(i, y)] = (y - j + 1) * -self.sigma
+
+        # Process scoring
+        i += 1
+        while i <= m:
+            j = initial_j
+            while j <= n:
+                mu = self.mu[self.v_reverse[i-1]][self.w_reverse[j-1]] if reverse else self.mu[self.v[i-1]][self.w[j-1]]
+                prev[(i, j)] = max([prev[(i-1, j)] - self.sigma, prev[(i, j-1)] - self.sigma, prev[(i-1, j-1)] + mu])
+                del prev[(i-1, j-1)]
+                j += 1
+            i += 1
+
+        # Delete final row unnecessary keys
+        j = initial_j
+        while j <= n:
+            del prev[(i-1, j-1)]
+            j += 1
+        return prev
+
+
+class MultipleAlignment(object):
+
+    def __init__(self, strings):
+        self.strings = strings
+        self.lengths = tuple([len(s) for s in strings])
+        self.keys = set()
+        self.score_key = tuple([1] * len(strings))
+        self.scores = {}
+        self.backtrack = {}
+        self.alignment = self.get_alignment()
+
+    def get_binary_keys(self, kmers=[], ones=True):
+        # Base case by adding the kmers to resulting output
+        if len(kmers) == len(self.strings):
+            self.keys.add(tuple(kmers))
+
+        # Recurse another layer (length) for each base in [0, 1]
+        else:
+            for base in [0, 1]:
+                ones = True if ones and base == 1 else False
+                if kmers + [base] != [0]*len(self.strings):
+                    self.get_binary_keys(kmers + [base])
+
+    def get_alignment(self):
+        self.get_binary_keys()
+        self.score_paths()
+        return tuple(self.decode(self.lengths))
+
+    def score_paths(self, kmers=[]):
+        # Base case of scoring and adding the kmers to scores and backtrack
+        if len(kmers) == len(self.strings):
+            self.find_max_score(tuple(kmers))
+
+        else:
+            for x in range(1, self.lengths[len(kmers)] + 1):
+                self.score_paths(kmers + [x])
+
+    def find_max_score(self, kmers):
+        best_score = (-1, None)
+
+        # Determine if all keys are the same
+        match = (True, self.strings[0][kmers[0] - 1])
+        i = 1
+        while i < len(kmers):
+            if self.strings[i][kmers[i] - 1] != match[1]:
+                match = (False, self.strings[0][kmers[0] - 1])
+            i += 1
+
+        # Process scores
+        for key in self.keys:
+            score = 0 if tuple(map(sub, kmers, key)) not in self.scores else self.scores[tuple(map(sub, kmers, key))]
+            if key == self.score_key and match[0]:
+                score += 1
+            if score > best_score[0]:
+                best_score = (score, key)
+
+        # Set score and backtrack
+        self.scores[kmers], self.backtrack[kmers] = best_score
+
+    def decode(self, kmers):
+        # Base case where a zero is reached
+        if 0 in kmers:
+            indels = max(kmers)
+            return ['-' * (indels - k) + (self.strings[i][:k]) for i, k in enumerate(kmers)]
+
+        prev = self.decode(tuple(map(sub, kmers, self.backtrack[kmers])))
+        return [s + (self.strings[i][kmers[i]-1] if self.backtrack[kmers][i] == 1 else '-') for i, s in enumerate(prev)]
+
+
 class DAG(object):
 
     def __init__(self, graph, root, tail):
@@ -296,4 +438,9 @@ class DAG(object):
 
 
 lines = sys.stdin.read().splitlines()
-print(solve_LCS(*lines, method='affine-gaps', sigma=11, mu=BLOSUM62, epsilon=1))
+# print(LinearAlignment('PLEASANTLY', 'MEASNLY', 5, BLOSUM62).divide_and_conquer())
+
+ma_obj = MultipleAlignment(tuple(lines))
+print(ma_obj.scores[ma_obj.lengths])
+print(ma_obj.alignment)
+

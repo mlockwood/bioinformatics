@@ -149,3 +149,17 @@ def select_scores_with_ties(scores, n):
         else:
             break
     return i
+
+
+def list_of_dict_counts(d):
+    """
+    Take a dictionary with {key: count of key} and return a sorted list
+    with copies of key equal to the count.
+    :param d: dictionary of keys and their counts
+    :return: sorted list of keys * their counts
+    """
+    out = []
+    for key in d:
+        for x in range(d[key]):
+            out.append(key)
+    return sorted(out)

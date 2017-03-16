@@ -42,3 +42,7 @@ def test_lines_to_graph_dict():
 
 def test_select_scores_with_ties():
     assert select_scores_with_ties([(8, 'A'), (7, 'B'), (7, 'C'), (6, 'D')], 2) == 3
+
+
+def test_list_of_dict_counts():
+    assert list_of_dict_counts({1: 2, 3: 1, 2: 3}) == [1, 1, 2, 2, 2, 3]

@@ -47,6 +47,11 @@ def test_score_alignments():
     assert score_alignments('CTAGTACTACTTGAC', 'CTA-TAGT-CTTAAC', 1, 2, 0) == 7
 
 
+def test_multiple_alignments():
+    multiple_alignment_object = MultipleAlignment(('ATATCCG', 'TCCGA', 'ATGTACTG'))
+    assert multiple_alignment_object.scores[multiple_alignment_object.lengths] == 3
+
+
 def test_DAG():
     graph = DAG.build_graph(['0->1:7', '0->2:4', '2->3:2', '1->4:1', '3->4:3'])
     assert(DAG(graph, '0', '4')).longest_path_in_DAG() == (9, ['0', '2', '3', '4'])

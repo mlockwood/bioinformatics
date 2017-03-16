@@ -62,7 +62,7 @@ def convert_matrix(matrix):
     return out
 
 
-def process(lines):
+def convert_inputs_and_process(lines):
     """
     Function to take the input variables and send them to the
     appropriate functions.

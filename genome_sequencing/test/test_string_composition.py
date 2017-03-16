@@ -22,7 +22,7 @@ def test_string_composition():
 
 
 def test_string_reconstruction_pre_ordered():
-    assert string_reconstruction_pre_ordered('ACCGA\nCCGAA\nCGAAG\nGAAGC\nAAGCT') == 'ACCGAAGCT'
+    assert string_reconstruction_pre_ordered(['ACCGA', 'CCGAA', 'CGAAG', 'GAAGC',' AAGCT']) == 'ACCGAAGCT'
 
 
 def test_get_prefix():
@@ -34,12 +34,12 @@ def test_get_suffix():
 
 
 def test_get_overlap_graph():
-    assert get_overlap_graph('ATGCG\nGCATG\nCATGC\nAGGCA\nGGCAT'
-                             ) == 'AGGCA -> GGCAT\nCATGC -> ATGCG\nGCATG -> CATGC\nGGCAT -> GCATG\n'
+    assert print_overlap_graph(get_overlap_graph(['ATGCG', 'GCATG', 'CATGC', 'AGGCA', 'GGCAT'])
+                               ) == 'AGGCA -> GGCAT\nCATGC -> ATGCG\nGCATG -> CATGC\nGGCAT -> GCATG\n'
 
 
 def test_de_bruijn_graph_from_string():
-    assert de_bruijn_graph_from_string(4, 'AAGATTCTCTAAGA') == (
+    assert print_de_bruijn_graph(de_bruijn_graph_from_string(4, 'AAGATTCTCTAAGA')) == (
         'AAG -> AGA,AGA\nAGA -> GAT\nATT -> TTC\nCTA -> TAA\nCTC -> TCT\nGAT -> ATT\nTAA -> AAG\nTCT -> CTA,CTC\n' +
         'TTC -> TCT\n'
     )

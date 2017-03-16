@@ -23,18 +23,17 @@ def string_composition(k, text):
     i = 0
     k = int(k)
     while i <= (len(text) - k):
-        kmers[text[i:i+k]] = True
+        kmers[text[i:i+k]] = kmers.get(text[i:i+k], 0) + 1
         i += 1
-    return '\n'.join(sorted(list(kmers.keys())))
+    return '\n'.join(list_of_dict_counts(kmers))
 
 
 def string_reconstruction_pre_ordered(kmers):
     """
     Construct a genome path from previously ordered kmers.
-    :param kmers: space delimited and ordered kmers for a genome
+    :param kmers: list of kmers
     :return: the genome path for the kmers
     """
-    kmers = kmers.rstrip().split()
     genome_path = kmers[0]
     for kmer in kmers[1:]:
         genome_path += kmer[-1]
@@ -62,10 +61,9 @@ def get_suffix(kmer):
 def get_overlap_graph(kmers):
     """
     Construct a genome graph where kmer -> next kmer.
-    :param kmers: space delimited and ordered kmers for a genome
+    :param kmers: list of kmers
     :return: the genome graph for the kmers
     """
-    kmers = kmers.rstrip().split()
     graph = {}
     for i in kmers:
         graph[i] = {}
@@ -73,7 +71,7 @@ def get_overlap_graph(kmers):
             if get_suffix(i) == get_prefix(j):
                 graph[i][j] = True
 
-    return print_overlap_graph(graph)
+    return graph
 
 
 def print_overlap_graph(graph):
@@ -106,7 +104,7 @@ def de_bruijn_graph_from_string(k, text):
                                                                                                  0) + 1
         i += 1
 
-    return print_de_bruijn_graph(graph)
+    return graph
 
 
 def de_bruijn_graph_by_composition(kmers):
@@ -132,10 +130,7 @@ def print_de_bruijn_graph(graph):
     """
     result = ''
     for i in sorted(list(graph.keys())):
-        to_nodes = []
-        for key in sorted(graph[i].keys()):
-            for x in range(graph[i][key]):
-                to_nodes.append(key)
+        to_nodes = list_of_dict_counts(graph[i])
         result += '{} -> {}\n'.format(i, ','.join(to_nodes))
     return result
 
@@ -336,6 +331,21 @@ def universal_circular_string(k):
     :return: universal string
     """
     return genome_reconstruction(list(get_all_binary_kmers(int(k)).keys()))[:-int(k)+1]
+
+
+def check_universal_linear_string(s, k):
+    """
+    Check if a string is a universal string that is linear
+    :param s: string
+    :param k: length of universal k-mer
+    :return: True if it is or False
+    """
+    kmers = {}
+    i = 0
+    while i <= len(s) - int(k):
+        kmers[s[i:i+int(k)]] = True
+        i += 1
+    return True if len(kmers) == 2 ** int(k) else False
 
 
 def strings_spelled_by_gapped_patterns(pairs, k, d):

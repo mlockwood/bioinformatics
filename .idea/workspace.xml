@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849964-3687-44c1-907b-2568064d7c39" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/genome_comparing/data/dataset_248_7_extra.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/michael.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/michael.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_comparing/data/dataset_248_5.txt" afterPath="$PROJECT_DIR$/genome_comparing/data/dataset_248_5.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generic.py" afterPath="$PROJECT_DIR$/generic.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_comparing/longest_common_substring.py" afterPath="$PROJECT_DIR$/genome_comparing/longest_common_substring.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_comparing/manhattan_tourist.py" afterPath="$PROJECT_DIR$/genome_comparing/manhattan_tourist.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_comparing/test/test_longest_common_substring.py" afterPath="$PROJECT_DIR$/genome_comparing/test/test_longest_common_substring.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_comparing/test/test_manhattan_tourist.py" afterPath="$PROJECT_DIR$/genome_comparing/test/test_manhattan_tourist.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_sequencing/string_composition.py" afterPath="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" afterPath="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_generic.py" afterPath="$PROJECT_DIR$/test/test_generic.py" />
     </list>
     <ignored path="bioinformatics.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,16 +34,16 @@
       <file leaf-file-name="longest_common_substring.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/genome_comparing/longest_common_substring.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="299" column="0" lean-forward="true" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
+            <state relative-caret-position="902">
+              <caret line="443" column="19" lean-forward="false" selection-start-line="443" selection-start-column="19" selection-end-line="443" selection-end-column="19" />
               <folding>
                 <element signature="e#48#59#0" expanded="true" />
-                <element signature="e#276#1481#0" expanded="false" />
-                <element signature="e#1535#5128#0" expanded="false" />
-                <element signature="e#5171#5784#0" expanded="false" />
-                <element signature="e#5851#7156#0" expanded="false" />
-                <element signature="e#7215#7892#0" expanded="false" />
-                <marker date="1489347752687" expanded="false" signature="7913:9269" ph="..." />
+                <element signature="e#324#1529#0" expanded="false" />
+                <element signature="e#1583#5176#0" expanded="false" />
+                <element signature="e#5219#5832#0" expanded="false" />
+                <element signature="e#7263#7940#0" expanded="false" />
+                <element signature="e#7979#10261#0" expanded="false" />
+                <marker date="1489700819718" expanded="false" signature="12765:14121" ph="..." />
               </folding>
             </state>
           </provider>
@@ -47,8 +52,38 @@
       <file leaf-file-name="test_longest_common_substring.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/genome_comparing/test/test_longest_common_substring.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="60" lean-forward="false" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
+            <state relative-caret-position="765">
+              <caret line="51" column="83" lean-forward="false" selection-start-line="51" selection-start-column="83" selection-end-line="51" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generic.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_generic.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test_generic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="705">
+              <caret line="47" column="71" lean-forward="false" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -113,9 +148,7 @@
         <option value="$PROJECT_DIR$/genome_sequencing/out/2_5_7_out.txt" />
         <option value="$PROJECT_DIR$/genome_sequencing/data/extra_dataset_1" />
         <option value="$PROJECT_DIR$/genome_sequencing/out/extra_dataset_1_out" />
-        <option value="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" />
         <option value="$PROJECT_DIR$/genome_sequencing/data/test" />
-        <option value="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
         <option value="$PROJECT_DIR$/dna_messaging/reverse_complement.py" />
         <option value="$PROJECT_DIR$/dna_messaging/test/test_reverse_compliment.py" />
         <option value="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
@@ -124,10 +157,7 @@
         <option value="$PROJECT_DIR$/genome_sequencing/data/dataset_103_2.txt" />
         <option value="$PROJECT_DIR$/genome_sequencing/antibiotics.py" />
         <option value="$PROJECT_DIR$/genome_sequencing/data/staph_genome.fasta" />
-        <option value="$PROJECT_DIR$/genome_comparing/manhattan_tourist.py" />
         <option value="$PROJECT_DIR$/genome_comparing/change_coins.py" />
-        <option value="$PROJECT_DIR$/generic.py" />
-        <option value="$PROJECT_DIR$/test/test_generic.py" />
         <option value="$PROJECT_DIR$/sum.txt" />
         <option value="$PROJECT_DIR$/genome_comparing/test/test_change_coins.py" />
         <option value="$PROJECT_DIR$/genome_comparing/test/test_manhattan_tourist.py" />
@@ -138,6 +168,11 @@
         <option value="$PROJECT_DIR$/genome_comparing/out/2_3_5_out.txt" />
         <option value="$PROJECT_DIR$/genome_comparing/out/2_3_5_extra_out.txt" />
         <option value="$PROJECT_DIR$/genome_comparing/data/dataset_248_7_extra.txt" />
+        <option value="$PROJECT_DIR$/generic.py" />
+        <option value="$PROJECT_DIR$/test/test_generic.py" />
+        <option value="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
+        <option value="$PROJECT_DIR$/genome_comparing/manhattan_tourist.py" />
+        <option value="$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py" />
         <option value="$PROJECT_DIR$/genome_comparing/test/test_longest_common_substring.py" />
         <option value="$PROJECT_DIR$/genome_comparing/longest_common_substring.py" />
       </list>
@@ -164,8 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -175,6 +208,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="genome_sequencing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bioinformatics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="genome_sequencing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -224,30 +289,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="out" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bioinformatics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bioinformatics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="genome_comparing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -276,23 +325,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bioinformatics" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="deamination" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dna_messaging" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="bioinformatics" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dna_messaging/deamination.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -344,6 +376,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bioinformatics" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/genome_comparing/longest_common_substring.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="string_composition" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/genome_sequencing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="bioinformatics" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -484,18 +533,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.pattern_count" />
-      <item index="1" class="java.lang.String" itemvalue="Python.deamination" />
-      <item index="2" class="java.lang.String" itemvalue="Python.code" />
-      <item index="3" class="java.lang.String" itemvalue="Python.antibiotics" />
-      <item index="4" class="java.lang.String" itemvalue="Python.longest_common_substring" />
+      <item index="1" class="java.lang.String" itemvalue="Python.code" />
+      <item index="2" class="java.lang.String" itemvalue="Python.antibiotics" />
+      <item index="3" class="java.lang.String" itemvalue="Python.longest_common_substring" />
+      <item index="4" class="java.lang.String" itemvalue="Python.string_composition" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.longest_common_substring" />
-        <item index="1" class="java.lang.String" itemvalue="Python.antibiotics" />
-        <item index="2" class="java.lang.String" itemvalue="Python.pattern_count" />
-        <item index="3" class="java.lang.String" itemvalue="Python.code" />
-        <item index="4" class="java.lang.String" itemvalue="Python.deamination" />
+        <item index="1" class="java.lang.String" itemvalue="Python.string_composition" />
+        <item index="2" class="java.lang.String" itemvalue="Python.antibiotics" />
+        <item index="3" class="java.lang.String" itemvalue="Python.pattern_count" />
+        <item index="4" class="java.lang.String" itemvalue="Python.code" />
       </list>
     </recent_temporary>
   </component>
@@ -522,6 +571,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959569" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278856" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -531,9 +581,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32890704" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890704" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -551,12 +600,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="13" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/generic.py" />
     <entry file="file://$PROJECT_DIR$/genome_sequencing/data/dataset_203_2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -626,13 +674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/string_composition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="91" column="41" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -751,13 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/genome_comparing/manhattan_tourist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/genome_comparing/change_coins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -780,45 +814,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/genome_comparing/test/test_manhattan_tourist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="126" column="46" lean-forward="false" selection-start-line="126" selection-start-column="46" selection-end-line="126" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="105" column="4" lean-forward="false" selection-start-line="105" selection-start-column="4" selection-end-line="105" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_antibiotics.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11">
           <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1376">
-          <caret line="110" column="20" lean-forward="true" selection-start-line="110" selection-start-column="20" selection-end-line="110" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -857,26 +856,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_comparing/test/test_manhattan_tourist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_comparing/manhattan_tourist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="87" column="79" lean-forward="false" selection-start-line="87" selection-start-column="79" selection-end-line="87" selection-end-column="79" />
+          <folding>
+            <element signature="e#204#1000#0" expanded="false" />
+            <element signature="e#1035#1458#0" expanded="false" />
+            <element signature="e#1504#2142#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="47" column="71" lean-forward="false" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dna_messaging/test/test_pattern_count.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_sequencing/string_composition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8372">
+          <caret line="575" column="0" lean-forward="true" selection-start-line="575" selection-start-column="0" selection-end-line="575" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genome_sequencing/test/test_string_composition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="36" column="60" lean-forward="false" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/genome_comparing/test/test_longest_common_substring.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="60" lean-forward="false" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
+        <state relative-caret-position="765">
+          <caret line="51" column="83" lean-forward="false" selection-start-line="51" selection-start-column="83" selection-end-line="51" selection-end-column="83" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/genome_comparing/longest_common_substring.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="299" column="0" lean-forward="true" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
+        <state relative-caret-position="902">
+          <caret line="443" column="19" lean-forward="false" selection-start-line="443" selection-start-column="19" selection-end-line="443" selection-end-column="19" />
           <folding>
             <element signature="e#48#59#0" expanded="true" />
-            <element signature="e#276#1481#0" expanded="false" />
-            <element signature="e#1535#5128#0" expanded="false" />
-            <element signature="e#5171#5784#0" expanded="false" />
-            <element signature="e#5851#7156#0" expanded="false" />
-            <element signature="e#7215#7892#0" expanded="false" />
-            <marker date="1489347752687" expanded="false" signature="7913:9269" ph="..." />
+            <element signature="e#324#1529#0" expanded="false" />
+            <element signature="e#1583#5176#0" expanded="false" />
+            <element signature="e#5219#5832#0" expanded="false" />
+            <element signature="e#7263#7940#0" expanded="false" />
+            <element signature="e#7979#10261#0" expanded="false" />
+            <marker date="1489700819718" expanded="false" signature="12765:14121" ph="..." />
           </folding>
         </state>
       </provider>

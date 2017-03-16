@@ -14,4 +14,4 @@ def test_manhattan_tourist():
     lines = []
     for row in reader:
         lines.append(row.rstrip())
-    assert process(lines) == 34
+    assert convert_inputs_and_process(lines) == 34
