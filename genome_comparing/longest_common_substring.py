@@ -262,11 +262,26 @@ class LinearAlignment(object):
         self.w_reverse = w[::-1]
         self.sigma = sigma
         self.mu = mu
-        self.path = []
+        self.path = set()
         self.alignment = None
 
+    def find_middle_edge(self):
+        """
+        Simple function to call to find the middle edge.
+        :return: two coordinates representing the middle edge
+        """
+        return self.divide_matrix(0, 0, len(self.v), len(self.w))
+
     def divide_and_conquer(self):
-        self.divide_matrix(0, 0, len(self.v), len(self.w))
+        self.recurse_divide(0, 0, len(self.v), len(self.w))
+
+    def recurse_divide(self, i, j, m, n):
+        edge = self.divide_matrix(i, j, m, n)
+        for node in edge:
+            self.path.add(node)
+
+        
+
 
     def divide_matrix(self, i, j, m, n):
         """
@@ -276,15 +291,21 @@ class LinearAlignment(object):
         :param j: initial index for w
         :param m: final index for v
         :param n: final index for w
-        :return:
+        :return: the middle edge for the indices
         """
-        middle = j + floor((n - j) / 2)
-        scores = self.score_division(i, j, m, middle)
-        sink_scores = self.score_division(i, j, m, n-middle, reverse=True)
-        print(scores)
-        print(sink_scores)
-        for score in sink_scores:
-            scores[score] = scores.get(score, 0) + sink_scores[score]
+        divider = j + floor((n - j) / 2)
+        scores, ignore = self.score_division(i, j, m, divider)
+        sink_scores, backtrack = self.score_division(i, j, m, n-divider, reverse=True)
+
+        # Find the max score indicating the middle node by aligning from source and from sink
+        max_score = (-sys.maxsize, None)
+        for score in scores:
+            if scores[score] + sink_scores[(m-score[0], n-score[1])] > max_score[0]:
+                max_score = (scores[score] + sink_scores[(m-score[0], n-score[1])], score)
+
+        # Find the middle edge from the middle point
+        edge = backtrack[(m-max_score[1][0], n-max_score[1][1])]
+        return max_score[1], (m-edge[0], n-edge[1])
 
     def score_division(self, i, j, m, n, reverse=False):
         """
@@ -300,6 +321,7 @@ class LinearAlignment(object):
         # Set base variables
         initial_j = j + 1
         prev = {}
+        backtrack = {}
         for x in range(i, m+1):
             prev[(x, j)] = (x - i) * -self.sigma
         for y in range(j+1, n+1):
@@ -310,8 +332,29 @@ class LinearAlignment(object):
         while i <= m:
             j = initial_j
             while j <= n:
-                mu = self.mu[self.v_reverse[i-1]][self.w_reverse[j-1]] if reverse else self.mu[self.v[i-1]][self.w[j-1]]
-                prev[(i, j)] = max([prev[(i-1, j)] - self.sigma, prev[(i, j-1)] - self.sigma, prev[(i-1, j-1)] + mu])
+                # Handle mu value
+                if isinstance(self.mu, dict):
+                    mu_value = self.mu[self.v_reverse[i-1]][self.w_reverse[j-1]] if reverse else (
+                        self.mu[self.v[i-1]][self.w[j-1]])
+                else:
+                    if reverse:
+                        mu_value = -self.mu if self.v_reverse[i-1] != self.w_reverse[j-1] else 1
+                    else:
+                        mu_value = -self.mu if self.v[i-1] != self.w[j-1] else 1
+
+                # Select best score
+                if reverse and j == n:
+                    prev[(i, j)], backtrack[(i, j)] = max([
+                        (prev[(i-1, j)] - self.sigma, (i-1, j)),
+                        (prev[(i, j-1)] - self.sigma, (i, j-1)),
+                        (prev[(i-1, j-1)] + mu_value, (i-1, j-1))
+                    ])
+                else:
+                    prev[(i, j)] = max([
+                        prev[(i-1, j)] - self.sigma,
+                        prev[(i, j-1)] - self.sigma,
+                        prev[(i-1, j-1)] + mu_value
+                    ])
                 del prev[(i-1, j-1)]
                 j += 1
             i += 1
@@ -321,7 +364,7 @@ class LinearAlignment(object):
         while j <= n:
             del prev[(i-1, j-1)]
             j += 1
-        return prev
+        return prev, backtrack
 
 
 class MultipleAlignment(object):
@@ -437,10 +480,6 @@ class DAG(object):
                 self.explore_DAG(path+[node], weight+self.graph[current_tail][node])
 
 
-lines = sys.stdin.read().splitlines()
-# print(LinearAlignment('PLEASANTLY', 'MEASNLY', 5, BLOSUM62).divide_and_conquer())
-
-ma_obj = MultipleAlignment(tuple(lines))
-print(ma_obj.scores[ma_obj.lengths])
-print(ma_obj.alignment)
-
+# lines = sys.stdin.read().splitlines()
+print(LinearAlignment('PLEASANTLY', 'MEASNLY', 5, BLOSUM62).find_middle_edge())
+print(LinearAlignment('ATTCAA', 'ACGGAA', 0, 0).find_middle_edge())
