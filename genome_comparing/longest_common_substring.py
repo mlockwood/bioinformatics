@@ -267,7 +267,7 @@ class LinearAlignment(object):
 
     def find_middle_edge(self):
         """
-        Simple function to call to find the middle edge.
+        Simple function to find the middle edge.
         :return: two coordinates representing the middle edge
         """
         return self.divide_matrix(0, 0, len(self.v), len(self.w))
@@ -277,10 +277,7 @@ class LinearAlignment(object):
 
     def recurse_divide(self, i, j, m, n):
         edge = self.divide_matrix(i, j, m, n)
-        for node in edge:
-            self.path.add(node)
-
-        
+        [self.path.add(node) for node in edge]
 
 
     def divide_matrix(self, i, j, m, n):
