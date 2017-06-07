@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849964-3687-44c1-907b-2568064d7c39" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/genome_clustering/k_means_clustering.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/genome_clustering/test/test_k_means_clustering.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/genome_clustering/mitochondria.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dna_messaging/pattern_count.py" afterPath="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_clustering/k_means_clustering.py" afterPath="$PROJECT_DIR$/genome_clustering/k_means_clustering.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/genome_clustering/test/test_k_means_clustering.py" afterPath="$PROJECT_DIR$/genome_clustering/test/test_k_means_clustering.py" />
     </list>
     <ignored path="bioinformatics.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,29 +28,11 @@
       <file leaf-file-name="k_means_clustering.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/genome_clustering/k_means_clustering.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pattern_count.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dna_messaging/pattern_count.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="175" column="44" lean-forward="false" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataset_38039_2.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/genome_clustering/data/dataset_38039_2.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="181">
+              <caret line="124" column="54" lean-forward="false" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+              <folding>
+                <element signature="e#48#59#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,8 +40,18 @@
       <file leaf-file-name="test_k_means_clustering.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/genome_clustering/test/test_k_means_clustering.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="390">
+              <caret line="26" column="76" lean-forward="false" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mitochondria.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/genome_clustering/mitochondria.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="35" column="67" lean-forward="false" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -161,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/comparing_genes/longest_common_substring.py" />
         <option value="$PROJECT_DIR$/comparing_genes/test/test_manhattan_tourist.py" />
         <option value="$PROJECT_DIR$/dna_messaging/test/test_generic.py" />
         <option value="$PROJECT_DIR$/dna_messaging/out/this" />
@@ -210,6 +201,7 @@
         <option value="$PROJECT_DIR$/genome_comparing/test/test_longest_common_substring.py" />
         <option value="$PROJECT_DIR$/genome_comparing/longest_common_substring.py" />
         <option value="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
+        <option value="$PROJECT_DIR$/genome_clustering/mitochondria.py" />
         <option value="$PROJECT_DIR$/genome_clustering/test/test_k_means_clustering.py" />
         <option value="$PROJECT_DIR$/genome_clustering/k_means_clustering.py" />
       </list>
@@ -280,20 +272,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bioinformatics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bioinformatics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dna_messaging" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -324,7 +302,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.longest_common_substring">
+  <component name="RunManager" selected="Python.mitochondria">
     <configuration default="false" name="pattern_count" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -338,24 +316,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bioinformatics" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dna_messaging/pattern_count.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="code" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dna_messaging" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="bioinformatics" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dna_messaging/code.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -410,6 +370,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bioinformatics" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/genome_sequencing/string_composition.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="mitochondria" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/genome_clustering" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="bioinformatics" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/genome_clustering/mitochondria.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -513,18 +491,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.pattern_count" />
-      <item index="1" class="java.lang.String" itemvalue="Python.code" />
-      <item index="2" class="java.lang.String" itemvalue="Python.antibiotics" />
-      <item index="3" class="java.lang.String" itemvalue="Python.longest_common_substring" />
-      <item index="4" class="java.lang.String" itemvalue="Python.string_composition" />
+      <item index="1" class="java.lang.String" itemvalue="Python.antibiotics" />
+      <item index="2" class="java.lang.String" itemvalue="Python.longest_common_substring" />
+      <item index="3" class="java.lang.String" itemvalue="Python.string_composition" />
+      <item index="4" class="java.lang.String" itemvalue="Python.mitochondria" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.longest_common_substring" />
-        <item index="1" class="java.lang.String" itemvalue="Python.string_composition" />
-        <item index="2" class="java.lang.String" itemvalue="Python.antibiotics" />
-        <item index="3" class="java.lang.String" itemvalue="Python.pattern_count" />
-        <item index="4" class="java.lang.String" itemvalue="Python.code" />
+        <item index="0" class="java.lang.String" itemvalue="Python.mitochondria" />
+        <item index="1" class="java.lang.String" itemvalue="Python.longest_common_substring" />
+        <item index="2" class="java.lang.String" itemvalue="Python.string_composition" />
+        <item index="3" class="java.lang.String" itemvalue="Python.antibiotics" />
+        <item index="4" class="java.lang.String" itemvalue="Python.pattern_count" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -570,9 +548,9 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959569" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890704" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32890704" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3278856" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278856" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -605,13 +583,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/genome_sequencing/data/dataset_203_11.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/genome_sequencing/data/dataset_6206_7.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -931,19 +902,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/genome_clustering/mitochondria.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="67" lean-forward="false" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/genome_clustering/test/test_k_means_clustering.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="390">
+          <caret line="26" column="76" lean-forward="false" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/genome_clustering/k_means_clustering.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="181">
+          <caret line="124" column="54" lean-forward="false" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+          <folding>
+            <element signature="e#48#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
