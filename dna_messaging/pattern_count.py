@@ -165,7 +165,7 @@ def get_kmer_counts(genome, k, d=0, rc=False):
 
 def get_frequent_kmers(genome, k, d=0, rc=False):
     """
-    Find the most frequent k-mers for a genome genome.
+    Find the most frequent k-mers for a genome.
     :param genome: genome string
     :param k: length of k-mer
     :param d: maximum hamming distance value if approximate method
